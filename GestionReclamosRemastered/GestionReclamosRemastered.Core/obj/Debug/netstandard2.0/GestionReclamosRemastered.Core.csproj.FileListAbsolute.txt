@@ -1,0 +1,9 @@
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\bin\Debug\netstandard2.0\GestionReclamosRemastered.Core.deps.json
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\bin\Debug\netstandard2.0\GestionReclamosRemastered.Core.dll
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\bin\Debug\netstandard2.0\GestionReclamosRemastered.Core.pdb
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\obj\Debug\netstandard2.0\GestionReclamosRemastered.Core.csprojAssemblyReference.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\obj\Debug\netstandard2.0\GestionReclamosRemastered.Core.AssemblyInfoInputs.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\obj\Debug\netstandard2.0\GestionReclamosRemastered.Core.AssemblyInfo.cs
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\obj\Debug\netstandard2.0\GestionReclamosRemastered.Core.csproj.CoreCompileInputs.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\obj\Debug\netstandard2.0\GestionReclamosRemastered.Core.dll
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Core\obj\Debug\netstandard2.0\GestionReclamosRemastered.Core.pdb

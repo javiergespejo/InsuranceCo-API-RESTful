@@ -1,0 +1,5 @@
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosAPI\obj\Debug\netcoreapp3.1\GestionReclamosAPI.csprojAssemblyReference.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosAPI\obj\Debug\netcoreapp3.1\GestionReclamosAPI.AssemblyInfoInputs.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosAPI\obj\Debug\netcoreapp3.1\GestionReclamosAPI.AssemblyInfo.cs
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosAPI\obj\Debug\netcoreapp3.1\GestionReclamosAPI.csproj.CoreCompileInputs.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosAPI\obj\Debug\netcoreapp3.1\GestionReclamosAPI.MvcApplicationPartsAssemblyInfo.cache

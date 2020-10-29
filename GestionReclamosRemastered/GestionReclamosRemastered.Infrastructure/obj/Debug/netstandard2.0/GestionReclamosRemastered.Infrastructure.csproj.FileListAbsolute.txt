@@ -1,0 +1,12 @@
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\bin\Debug\netstandard2.0\GestionReclamosRemastered.Core.dll
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.csprojAssemblyReference.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.AssemblyInfo.cs
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\bin\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.deps.json
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\bin\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.dll
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\bin\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.pdb
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\bin\Debug\netstandard2.0\GestionReclamosRemastered.Core.pdb
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.csproj.CopyComplete
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.dll
+C:\Users\sosaj\source\repos\GestionReclamosRemastered\GestionReclamosRemastered.Infrastructure\obj\Debug\netstandard2.0\GestionReclamosRemastered.Infrastructure.pdb
