@@ -16,10 +16,5 @@ namespace GestionReclamosRemastered.Core.Services
         {
             return _unitOfWork.UserRepository.AuthenticationAsync(user, pass);
         }
-
-        public async Task<Usuario> GetUser(int id)
-        {
-            return await _unitOfWork.UserRepository.GetById(id);
-        }
     }
 }

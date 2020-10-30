@@ -6,7 +6,5 @@ namespace GestionReclamosRemastered.Core.Interfaces
     public interface IUserService
     {
         Task<Usuario> Authentication(string user, string pass);
-        Task<Usuario> GetUser(int id);
-        
     }
 }
