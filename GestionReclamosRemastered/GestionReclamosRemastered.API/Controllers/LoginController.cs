@@ -1,9 +1,13 @@
 ﻿using GestionReclamosRemastered.API.Responses;
 using GestionReclamosRemastered.Core.CustomEntities;
-using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -13,40 +17,62 @@ namespace GestionReclamosRemastered.API.Controllers
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IConfiguration _configuration;
 
-        public LoginController(IUserService userService)
+        public LoginController(IUserService userService, IConfiguration configuration)
         {
             _userService = userService;
+            _configuration = configuration;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AuthenticateAsync(UserLogin userLogin)
+        public async Task<IActionResult> AuthenticationAsync(UserLogin userLogin)
         {
-            try
+            if (await UserIsValid(userLogin))
             {
-                var user = await _userService.Authentication(userLogin.User, userLogin.Password);
-                if (user != null)
-                {
-                    var userDto = new UserDto()
-                    {
-                        IdUsuario = user.IdUsuario,
-                        Nombre = user.Nombre,
-                        CodUsuario = user.CodUsuario,
-                        Password = user.Password,
-                        IdTipoUsuario = user.IdTipoUsuario,
-                        SnActivo = user.SnActivo
-                    };
-                    var response = new ApiResponse<UserDto>(userDto);
-                    return Ok(response);
-                }
-                throw new Exception();
+                var token = GenerateToken(userLogin.User);
+                return Ok(new { token });
             }
-            catch (Exception)
+            var response = new ApiResponse<UserLogin>(userLogin);
+            return NotFound(response);
+        }
+
+        private async Task<bool> UserIsValid(UserLogin login)
+        {
+            var user = await _userService.Authentication(login.User, login.Password);
+            if (user != null)
             {
-                return NotFound();
+                return true;
             }
-            
-            
+            return false;
+        }
+
+        private string GenerateToken(string userName)
+        {
+            //Header
+            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));
+            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            var header = new JwtHeader(signingCredentials);
+
+            //Claims
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, userName)
+            };
+
+            //Payload
+            var payload = new JwtPayload
+            (
+                _configuration["Authentication:Issuer"],
+                _configuration["Authentication:Audience"],
+                claims,
+                DateTime.Now,
+                DateTime.UtcNow.AddMinutes(2)
+            );
+
+            //Signature
+            var token = new JwtSecurityToken(header, payload);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

@@ -119,8 +119,6 @@ C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\Gest
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.csprojAssemblyReference.cache
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.AssemblyInfoInputs.cache
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.AssemblyInfo.cs
-C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.csproj.CoreCompileInputs.cache
-C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.RazorTargetAssemblyInfo.cache
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.csproj.CopyComplete
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\staticwebassets\GestionReclamosRemastered.API.StaticWebAssets.Manifest.cache
@@ -128,3 +126,6 @@ C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\Gest
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.dll
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.pdb
 C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.genruntimeconfig.cache
+C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.csproj.CoreCompileInputs.cache
+C:\Users\sosaj\source\repos\squad-apification-api\GestionReclamosRemastered\GestionReclamosRemastered.API\obj\Debug\netcoreapp3.1\GestionReclamosRemastered.API.MvcApplicationPartsAssemblyInfo.cache

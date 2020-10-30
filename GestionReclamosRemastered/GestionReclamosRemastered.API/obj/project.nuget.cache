@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rWlToZ2QijTO94cN42YAKhRKdDsf9sUIRlF8swBnTXhH5p4k6s1jXrwiahIG9Gx79fFeKf0KvvY3mfp9+DAxGA==",
+  "dgSpecHash": "Aboji9T5w2ue0BgvAsVK6zENG/HPsoh7cOgjzIOeWRY/VjvjMYUUr/tl1pJ9lK7Txkgv/2oX/OC7fkmOfPEHgA==",
   "success": true,
   "projectFilePath": "C:\\Users\\sosaj\\source\\repos\\squad-apification-api\\GestionReclamosRemastered\\GestionReclamosRemastered.API\\GestionReclamosRemastered.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sosaj\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.9\\microsoft.aspnetcore.authentication.jwtbearer.3.1.9.nupkg.sha512",
     "C:\\Users\\sosaj\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\sosaj\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\sosaj\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
