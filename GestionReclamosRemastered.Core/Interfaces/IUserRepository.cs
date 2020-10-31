@@ -1,7 +1,7 @@
-﻿using GestionReclamosRemastered.Core.Interfaces;
+﻿using GestionReclamosRemastered.Core.Entities;
 using System.Threading.Tasks;
 
-namespace GestionReclamosRemastered.Core.Entities
+namespace GestionReclamosRemastered.Core.Interfaces
 {
     public interface IUserRepository : IGenericRepository<Usuario>
     {

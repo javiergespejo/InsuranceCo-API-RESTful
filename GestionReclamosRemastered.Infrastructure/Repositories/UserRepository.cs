@@ -1,4 +1,5 @@
 ﻿using GestionReclamosRemastered.Core.Entities;
+using GestionReclamosRemastered.Core.Interfaces;
 using GestionReclamosRemastered.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
