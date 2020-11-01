@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GestionReclamosRemastered.Core.Entities
 {
-    public partial class Representante
+    public partial class Representante : BaseEntity
     {
         public Representante()
         {

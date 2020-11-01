@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GestionReclamosRemastered.Core.DTOs
 {
-    public class RepresentanteDTO
+    class RepresentativeDto
     {
         public int IdRepresentante { get; set; }
         public string TxtNombre { get; set; }
