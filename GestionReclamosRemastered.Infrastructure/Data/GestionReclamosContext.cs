@@ -51,7 +51,7 @@ namespace GestionReclamosRemastered.Infrastructure.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-0GFTGL9;Database=GestionReclamos;Integrated Security = true");
+                optionsBuilder.UseSqlServer("Server=LAPTOP-FEDERICO\\SQLEXPRESS01;Database=GestionReclamos;Integrated Security = true");
             }
         }
 
