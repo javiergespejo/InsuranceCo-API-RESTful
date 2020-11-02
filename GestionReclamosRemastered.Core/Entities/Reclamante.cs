@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GestionReclamosRemastered.Core.Entities
 {
-    public partial class Reclamante
+    public partial class Reclamante : BaseEntity
     {
         public long IdReclamante { get; set; }
         public long IdStro { get; set; }
