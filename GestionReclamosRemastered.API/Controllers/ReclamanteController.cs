@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
@@ -41,9 +42,19 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // GET api/<ReclamanteController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
+                var claimantDto = _mapper.Map<ReclamanteDto>(claimant);
+                var response = new ApiResponse<ReclamanteDto>(claimantDto);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
 
         // POST api/<ReclamanteController>
