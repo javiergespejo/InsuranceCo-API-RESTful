@@ -18,10 +18,12 @@ namespace GestionReclamosRemastered.API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public ReclamanteController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IReclamanteService _reclamanteService;
+        public ReclamanteController(IUnitOfWork unitOfWork, IMapper mapper, IReclamanteService reclamanteService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _reclamanteService = reclamanteService;
         }
         // GET: api/<ReclamanteController>
         [HttpGet]
@@ -77,8 +79,20 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // PUT api/<ReclamanteController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, ReclamanteDto claimantDto)
         {
+            try
+            {
+                var claimant = _mapper.Map<Reclamante>(claimantDto);
+                claimant.IdReclamante = id;
+                var result = await _reclamanteService.UpdateClaimant(claimant);
+                var response = new ApiResponse<bool>(result);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE api/<ReclamanteController>/5
