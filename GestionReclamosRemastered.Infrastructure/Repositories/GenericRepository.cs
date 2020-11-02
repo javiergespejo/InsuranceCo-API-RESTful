@@ -38,5 +38,10 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
             T entity = await GetById(id);
             _entities.Remove(entity);
         }
+
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _entities.ToListAsync();
+        }
     }
 }
