@@ -8,6 +8,7 @@ namespace GestionReclamosRemastered.Core.Interfaces
     {
         IEnumerable<T> GetAll();
         Task<T> GetById(int id);
+        Task<T> GetByLongId(long id);
         Task Add(T entity);
         void Update(T entity);
         Task Delete(int id);
