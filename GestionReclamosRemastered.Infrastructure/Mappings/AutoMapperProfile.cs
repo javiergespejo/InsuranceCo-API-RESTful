@@ -12,6 +12,8 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             CreateMap<UserDto, Usuario>();
             CreateMap<TipoUsuario, TipoUsuarioDto>();
             CreateMap<TipoUsuarioDto, TipoUsuario>();
+            CreateMap<ReclamanteDto, Reclamante>();
+            CreateMap<Reclamante, ReclamanteDto>();
         }
     }
 }
