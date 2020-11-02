@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace GestionReclamosRemastered.Core.Entities
+namespace GestionReclamosRemastered.Core.DTOs
 {
-    public partial class Reclamante : BaseEntity
+    public class ReclamanteDto
     {
         public long IdReclamante { get; set; }
         public long IdStro { get; set; }
@@ -18,7 +17,7 @@ namespace GestionReclamosRemastered.Core.Entities
         public int IdUsuario { get; set; }
         public int SnActivo { get; set; }
 
-        public virtual Siniestro IdStroNavigation { get; set; }
-        public virtual Usuario IdUsuarioNavigation { get; set; }
+        //public virtual Siniestro IdStroNavigation { get; set; }
+        //public virtual UserDto IdUsuarioNavigation { get; set; }
     }
 }
