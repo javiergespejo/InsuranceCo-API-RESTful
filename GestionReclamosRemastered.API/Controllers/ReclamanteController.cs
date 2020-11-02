@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GestionReclamosRemastered.API.Responses;
 using GestionReclamosRemastered.Core.DTOs;
+using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -59,8 +60,19 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // POST api/<ReclamanteController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(ReclamanteDto claimantDto)
         {
+            try
+            {
+                var claimant = _mapper.Map<Reclamante>(claimantDto);
+                await _unitOfWork.ReclamanteRepository.Add(claimant);
+                await _unitOfWork.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // PUT api/<ReclamanteController>/5
