@@ -97,8 +97,19 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // DELETE api/<ReclamanteController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var user = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
+                var result = await _reclamanteService.SoftDelete(user);
+                var response = new ApiResponse<bool>(result);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.Core.Services
@@ -15,9 +12,12 @@ namespace GestionReclamosRemastered.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Task<bool> SoftDelete(Reclamante claimant)
+        public async Task<bool> SoftDelete(Reclamante claimant)
         {
-            throw new NotImplementedException();
+            claimant.SnActivo = 0;
+            _unitOfWork.ReclamanteRepository.Update(claimant);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> UpdateClaimant(Reclamante claimant)
