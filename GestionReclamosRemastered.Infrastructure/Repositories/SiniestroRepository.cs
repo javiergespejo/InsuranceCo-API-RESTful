@@ -15,10 +15,5 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         public SiniestroRepository(GestionReclamosContext context) : base(context)
         {
         }
-
-        public Task<Siniestro> GetSiniestro(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
