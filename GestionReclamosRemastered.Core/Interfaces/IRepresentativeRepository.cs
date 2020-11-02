@@ -7,5 +7,6 @@ namespace GestionReclamosRemastered.Core.Interfaces
 {
     public interface IRepresentativeRepository : IGenericRepository<Representante>
     {
+
     }
 }
