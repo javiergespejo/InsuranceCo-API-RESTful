@@ -6,5 +6,6 @@ namespace GestionReclamosRemastered.Core.Interfaces
 {
     public interface ISiniestroRepository : IGenericRepository<Siniestro>
     {
+        Task<bool> SiniestroExist(Siniestro siniestro);
     }
 }

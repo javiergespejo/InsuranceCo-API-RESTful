@@ -15,5 +15,10 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         public SiniestroRepository(GestionReclamosContext context) : base(context)
         {
         }
+
+        public Task<bool> SiniestroExist(Siniestro siniestro)
+        {
+            return _entities.AnyAsync(s => s.NroStro == siniestro.NroStro);            
+        }
     }
 }
