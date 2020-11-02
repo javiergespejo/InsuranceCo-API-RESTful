@@ -8,23 +8,18 @@ namespace GestionReclamosRemastered.Core.DTOs
 {
     public class SiniestroDto
     {
-        [Key]
         public long IdStro { get; set; }
         public long NroStro { get; set; }
-        [Key]
         public int IdTipoSiniestro { get; set; }
         public DateTime FechaSiniestro { get; set; }
         public DateTime FechaCarga { get; set; }
-        [Key]
         public int IdUsuario { get; set; }
         public string TxtLugar { get; set; }
         public string TxtDominio { get; set; }
         public string TxtInterno { get; set; }
         public string TxtConductor { get; set; }
         public string TxtDeclaracion { get; set; }
-        [Key]
         public int IdRepresentante { get; set; }
-        [Key]
         public int IdEmpresa { get; set; }
         public string TxtObservaciones { get; set; }
         public long NroSiniestroProteccion { get; set; }
@@ -33,7 +28,6 @@ namespace GestionReclamosRemastered.Core.DTOs
         public double? DañoTerecero { get; set; }
         public double? DañoAsegurado { get; set; }
         public string TxtHora { get; set; }
-        [Key]
         public int IdResponsabilidad { get; set; }
         public  Empresa IdEmpresaNavigation { get; set; }
         public  Representante IdRepresentanteNavigation { get; set; }
@@ -113,6 +107,16 @@ namespace GestionReclamosRemastered.Core.DTOs
                 Mediacion = this.Mediacion,
                 Reclamante = this.Reclamante
             };
+        }
+
+        public static List<SiniestroDto> SiniestroDtoToEntityList(List<Siniestro> siniestros)
+        {
+            List<SiniestroDto> siniestroDtos = new List<SiniestroDto>();
+            foreach (var item in siniestros)
+            {
+                siniestroDtos.Add(new SiniestroDto(item));
+            }
+            return siniestroDtos;
         }
     }   
 }
