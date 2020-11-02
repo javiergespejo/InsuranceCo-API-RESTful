@@ -9,6 +9,7 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
     {
         private readonly GestionReclamosContext _context;
         private readonly IUserRepository _userRepository;
+        private readonly ISiniestroRepository _siniestroRepository;
         //private readonly IRepository<User> _userRepository;
         //private readonly IRepository<Comment> _commentRepository;
         public UnitOfWork(GestionReclamosContext context)
@@ -16,6 +17,7 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
             _context = context;
         }
         public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context);
+        public ISiniestroRepository SiniestroRepository => _siniestroRepository ?? new SiniestroRepository(_context);
 
         public void Dispose()
         {
