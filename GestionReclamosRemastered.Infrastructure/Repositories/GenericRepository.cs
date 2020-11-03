@@ -42,6 +42,11 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
             T entity = await GetById(id);
             _entities.Remove(entity);
         }
+        public async Task DeleteLong(long id)
+        {
+            T entity = await GetByLongId(id);
+            _entities.Remove(entity);
+        }
 
         public async Task<List<T>> GetAllAsync()
         {
