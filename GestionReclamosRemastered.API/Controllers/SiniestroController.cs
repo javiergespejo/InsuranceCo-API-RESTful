@@ -31,20 +31,23 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // GET: api/Siniestro/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Siniestro>> GetSiniestroById(long id)
-        {            
+        public async Task<ActionResult<SiniestroDto>> GetSiniestroById(long id)
+        {
             var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
             if (siniestro == null)
             {
                 return NotFound();
             }
 
-            return siniestro;
+            SiniestroDto siniestroDto = new SiniestroDto(siniestro);
+
+            return siniestroDto;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Siniestro>> PostSiniestro(Siniestro siniestro)
+        public async Task<ActionResult<SiniestroDto>> PostSiniestro(SiniestroDto siniestroDto)
         {
+            var siniestro = siniestroDto.ToSiniestroEntity();
             if (await _unitOfWork.SiniestroRepository.SiniestroExist(siniestro))
             {
                 return BadRequest();
@@ -60,7 +63,7 @@ namespace GestionReclamosRemastered.API.Controllers
                 throw ex;
             }
 
-            return CreatedAtAction("PostSiniestro", siniestro);
+            return CreatedAtAction("PostSiniestro", siniestroDto);
         }
 
         [HttpPatch("{id}")]
