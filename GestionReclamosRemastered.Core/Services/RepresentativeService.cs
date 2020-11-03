@@ -27,7 +27,7 @@ namespace GestionReclamosRemastered.Core.Services
             if (representative != null && representative.GetType().GetProperties()
                             .All(p => p.GetValue(representative) != null))
             {
-                representative.SnActivo = 1;
+                representative.SnActivo = 0;
                 _unitOfWork.RepresentativeRepository.Update(representative);
                 await _unitOfWork.SaveChangesAsync();
                 return true;
@@ -36,12 +36,12 @@ namespace GestionReclamosRemastered.Core.Services
         }
 
         /// <summary>
-        /// Gets a list of active (SnActivo = -1) representatives
+        /// Gets a list of active representatives
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Representante> GetAllRepresentatives()
+        public async Task<IEnumerable<Representante>> GetAllRepresentatives()
         {
-            return _unitOfWork.RepresentativeRepository.GetAll().Where(x => x.SnActivo == -1);
+            return await _unitOfWork.RepresentativeRepository.GetRepresentativesAsync();
         }
 
         /// <summary>
@@ -53,7 +53,6 @@ namespace GestionReclamosRemastered.Core.Services
         {
             return await _unitOfWork.RepresentativeRepository.GetById(id);
         }
-
         /// <summary>
         /// Updates a representative information
         /// </summary>

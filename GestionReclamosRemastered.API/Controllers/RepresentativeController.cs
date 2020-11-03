@@ -30,11 +30,11 @@ namespace GestionReclamosRemastered.API.Controllers
 
 
         [HttpGet]
-        public IActionResult GetRepresentatives()
+        public async Task<IActionResult> GetRepresentatives()
         {
             try
             {
-                var representativesList = _representativeService.GetAllRepresentatives();
+                var representativesList = await _representativeService.GetAllRepresentatives();
                 var representativeDto = _mapper.Map<IEnumerable<RepresentativeDto>>(representativesList);
                 var response = new ApiResponse<IEnumerable<RepresentativeDto>>(representativeDto);
                 return Ok(response);
