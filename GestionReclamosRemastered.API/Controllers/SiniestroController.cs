@@ -6,6 +6,7 @@ using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -30,9 +31,9 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // GET: api/Siniestro/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Siniestro>> GetSiniestroById(int id)
+        public async Task<ActionResult<Siniestro>> GetSiniestroById(long id)
         {            
-            var siniestro = await _unitOfWork.SiniestroRepository.GetById(id);
+            var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
             if (siniestro == null)
             {
                 return NotFound();
@@ -59,18 +60,32 @@ namespace GestionReclamosRemastered.API.Controllers
                 throw ex;
             }
 
-            return CreatedAtAction("PostSiniestro", new Siniestro());
+            return CreatedAtAction("PostSiniestro", siniestro);
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult<Siniestro>> PatchSiniestro(int id, Siniestro siniestro)
+        public async Task<ActionResult<Siniestro>> PatchSiniestro(long id, [FromBody] JsonPatchDocument<Siniestro> patchDoc)
         {
-            if (id != siniestro.IdStro)
+            if (patchDoc == null)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.SiniestroRepository.Update(siniestro);
+            var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
+
+            if (siniestro == null)
+            {
+                return NotFound();
+            }
+
+            patchDoc.ApplyTo(siniestro, ModelState);
+
+            var isValid = TryValidateModel(siniestro);
+
+            if (!isValid)
+            {
+                return BadRequest();
+            }
 
             try
             {
@@ -79,24 +94,23 @@ namespace GestionReclamosRemastered.API.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Siniestro>> DeleteSiniestro(int id)
+        public async Task<IActionResult> DeleteSiniestro(long id)
         {
-            var siniestro = await _unitOfWork.UserRepository.GetById(id);
+            var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
             if (siniestro == null)
             {
                 return NotFound();
             }
-            await _unitOfWork.SiniestroRepository.Delete(id);
+            await _unitOfWork.SiniestroRepository.DeleteLong(id);
             try
             {
                 await _unitOfWork.SaveChangesAsync();
-                return Ok(siniestro);
+                return Ok();
             }
             catch (Exception ex)
             {
