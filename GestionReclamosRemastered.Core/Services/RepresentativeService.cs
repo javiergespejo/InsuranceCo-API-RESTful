@@ -23,10 +23,11 @@ namespace GestionReclamosRemastered.Core.Services
         public async Task<bool> DeleteRepresentative(Representante representative)
         {
 
-            representative.SnActivo = 1;
-            if (representative.GetType().GetProperties()
+           
+            if (representative != null && representative.GetType().GetProperties()
                             .All(p => p.GetValue(representative) != null))
             {
+                representative.SnActivo = 1;
                 _unitOfWork.RepresentativeRepository.Update(representative);
                 await _unitOfWork.SaveChangesAsync();
                 return true;
@@ -60,7 +61,7 @@ namespace GestionReclamosRemastered.Core.Services
         /// <returns></returns>
         public async Task<bool> UpdateRepresentative(Representante representative)
         {
-            if (representative.GetType().GetProperties()
+            if (representative != null && representative.GetType().GetProperties()
                             .All(p => p.GetValue(representative) != null))
             {
                 _unitOfWork.RepresentativeRepository.Update(representative);
