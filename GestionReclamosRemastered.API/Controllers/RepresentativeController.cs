@@ -74,7 +74,8 @@ namespace GestionReclamosRemastered.API.Controllers
                 var representative = _mapper.Map<Representante>(representativeDto);
                 await _unitOfWork.RepresentativeRepository.Add(representative);
                 await _unitOfWork.SaveChangesAsync();
-                return Ok();
+                var response = new ApiResponse<string>("Representative saved");
+                return Ok(response);
             }
             catch (Exception)
             {
@@ -88,8 +89,10 @@ namespace GestionReclamosRemastered.API.Controllers
             try
             {
                 var representative = await _unitOfWork.RepresentativeRepository.GetById(id);
-                var result = await _representativeService.DeleteRepresentative(representative);
-                var response = new ApiResponse<bool>(result);
+                bool result = await _representativeService.DeleteRepresentative(representative);
+                //var response = new ApiResponse<bool>(result);
+                var response = new ApiResponse<string>("Representative could not be deleted");
+                if (result) response.Data = "Representative deleted";
                 return Ok(response);
             }
             catch (Exception)
@@ -107,7 +110,8 @@ namespace GestionReclamosRemastered.API.Controllers
                 var user = _mapper.Map<Representante>(representativeDto);
                 user.IdRepresentante = id;
                 var result = await _representativeService.UpdateRepresentative(user);
-                var response = new ApiResponse<bool>(result);
+                var response = new ApiResponse<string>("Representative could not be updated");
+                if (result) response.Data = "Representative updated";
                 return Ok(response);
             }
             catch (Exception)
