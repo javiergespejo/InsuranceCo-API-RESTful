@@ -32,8 +32,7 @@ namespace GestionReclamosRemastered.API
                    options.UseSqlServer(Configuration.GetConnectionString("GestionReclamos"))
                );
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IReclamanteService, ReclamanteService>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -42,7 +41,6 @@ namespace GestionReclamosRemastered.API
             services.AddTransient<ISiniestroRepository, SiniestroRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
