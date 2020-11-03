@@ -1,3 +1,4 @@
+using AutoMapper;
 using GestionReclamosRemastered.Core.Interfaces;
 using GestionReclamosRemastered.Core.Services;
 using GestionReclamosRemastered.Infrastructure.Data;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
 
 namespace GestionReclamosRemastered.API
@@ -29,9 +31,12 @@ namespace GestionReclamosRemastered.API
             services.AddDbContext<GestionReclamosContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GestionReclamos"))
                );
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserTypeRepository, UserTypeRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

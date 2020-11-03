@@ -39,7 +39,7 @@ namespace GestionReclamosRemastered.API.Controllers
 
         private async Task<bool> UserIsValid(UserLogin login)
         {
-            var user = await _userService.Authentication(login.User, login.Password);
+            var user = await _userService.AuthenticationAsync(login.User, login.Password);
             if (user != null)
             {
                 return true;

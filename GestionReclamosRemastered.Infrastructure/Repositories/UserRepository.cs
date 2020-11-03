@@ -1,4 +1,5 @@
 ﻿using GestionReclamosRemastered.Core.Entities;
+using GestionReclamosRemastered.Core.Interfaces;
 using GestionReclamosRemastered.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -14,10 +15,6 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         {
             var u = await _entities.Where(x => x.CodUsuario == userName && x.Password == pass).FirstOrDefaultAsync();
             return u;
-        }
-        public async Task<Usuario> GetUser(int id)
-        {
-            return await _entities.Where(x => x.IdUsuario == id).FirstOrDefaultAsync();
         }
     }
 }
