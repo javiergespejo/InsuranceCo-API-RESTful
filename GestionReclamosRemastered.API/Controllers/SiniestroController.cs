@@ -47,6 +47,7 @@ namespace GestionReclamosRemastered.API.Controllers
             return Ok(siniestroDto);
         }
 
+        // POST: api/Siniestro
         [HttpPost]
         public async Task<IActionResult> PostSiniestro(SiniestroDto siniestroDto)
         {
@@ -69,6 +70,7 @@ namespace GestionReclamosRemastered.API.Controllers
             return CreatedAtAction("PostSiniestro", siniestroDto);
         }
 
+        // PATCH: api/Siniestro/5
         [HttpPatch("{id}")]
         public async Task<IActionResult> PatchSiniestro(long id, [FromBody] JsonPatchDocument<SiniestroDto> patchDocDto)
         {
@@ -106,6 +108,7 @@ namespace GestionReclamosRemastered.API.Controllers
             }
         }
 
+        // DELETE: api/Siniestro/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSiniestro(long id)
         {
