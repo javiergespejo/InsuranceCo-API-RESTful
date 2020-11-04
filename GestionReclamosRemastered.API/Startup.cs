@@ -39,6 +39,7 @@ namespace GestionReclamosRemastered.API
             services.AddTransient<IUserTypeRepository, UserTypeRepository>();
             services.AddTransient<IReclamanteRepository, ReclamanteRepository>();
             services.AddTransient<ISiniestroRepository, SiniestroRepository>();
+            services.AddTransient<IRecuperoRepository, RecuperoRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication(options =>
