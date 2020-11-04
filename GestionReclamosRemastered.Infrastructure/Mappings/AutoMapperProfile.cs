@@ -12,14 +12,11 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             CreateMap<Usuario, UserDto>().ForMember(x => x.Password, opt => opt.Ignore());
             CreateMap<UserDto, Usuario>();
             // Tipo de usuario
-            CreateMap<TipoUsuario, TipoUsuarioDto>();
-            CreateMap<TipoUsuarioDto, TipoUsuario>();
+            CreateMap<TipoUsuario, TipoUsuarioDto>().ReverseMap();
             // Reclamante
-            CreateMap<ReclamanteDto, Reclamante>();
-            CreateMap<Reclamante, ReclamanteDto>();
+            CreateMap<ReclamanteDto, Reclamante>().ReverseMap();            
             // Siniestro
-            CreateMap<Siniestro, SiniestroDto>();
-            CreateMap<SiniestroDto, Siniestro>();
+            CreateMap<Siniestro, SiniestroDto>().ReverseMap();
         }
     }
 }
