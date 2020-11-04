@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
@@ -16,22 +15,25 @@ namespace GestionReclamosRemastered.API.Controllers
     public class SiniestroController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public SiniestroController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public SiniestroController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         // GET: api/Siniestro
         [HttpGet]
-        public async Task<IEnumerable<SiniestroDto>> GetAllSiniestros()
+        public async Task<IActionResult> GetAllSiniestros()
         {
             var siniestros = await _unitOfWork.SiniestroRepository.GetAllAsync();
-            return SiniestroDto.SiniestroDtoToEntityList(siniestros);
+            var siniestrosDto = _mapper.Map<List<SiniestroDto>>(siniestros);
+            return Ok(siniestrosDto);
         }
 
         // GET: api/Siniestro/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SiniestroDto>> GetSiniestroById(long id)
+        public async Task<IActionResult> GetSiniestroById(long id)
         {
             var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
             if (siniestro == null)
@@ -39,15 +41,14 @@ namespace GestionReclamosRemastered.API.Controllers
                 return NotFound();
             }
 
-            SiniestroDto siniestroDto = new SiniestroDto(siniestro);
-
-            return siniestroDto;
+            var siniestroDto = _mapper.Map<SiniestroDto>(siniestro);
+            return Ok(siniestroDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<SiniestroDto>> PostSiniestro(SiniestroDto siniestroDto)
+        public async Task<IActionResult> PostSiniestro(SiniestroDto siniestroDto)
         {
-            var siniestro = siniestroDto.ToSiniestroEntity();
+            var siniestro = _mapper.Map<Siniestro>(siniestroDto);
             if (await _unitOfWork.SiniestroRepository.SiniestroExist(siniestro))
             {
                 return BadRequest();
@@ -67,9 +68,9 @@ namespace GestionReclamosRemastered.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult<Siniestro>> PatchSiniestro(long id, [FromBody] JsonPatchDocument<Siniestro> patchDoc)
+        public async Task<IActionResult> PatchSiniestro(long id, [FromBody] JsonPatchDocument<SiniestroDto> patchDocDto)
         {
-            if (patchDoc == null)
+            if (patchDocDto == null)
             {
                 return BadRequest();
             }
@@ -81,9 +82,11 @@ namespace GestionReclamosRemastered.API.Controllers
                 return NotFound();
             }
 
+            var patchDoc = _mapper.Map<JsonPatchDocument<Siniestro>>(patchDocDto);
             patchDoc.ApplyTo(siniestro, ModelState);
 
-            var isValid = TryValidateModel(siniestro);
+            var siniestroDto = _mapper.Map<SiniestroDto>(siniestro);
+            var isValid = TryValidateModel(siniestroDto);
 
             if (!isValid)
             {
@@ -93,7 +96,7 @@ namespace GestionReclamosRemastered.API.Controllers
             try
             {
                 await _unitOfWork.SaveChangesAsync();
-                return Ok(siniestro);
+                return Ok();
             }
             catch (Exception ex)
             {
