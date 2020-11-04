@@ -1,8 +1,6 @@
 ﻿using GestionReclamosRemastered.Core.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace GestionReclamosRemastered.Core.DTOs
 {
