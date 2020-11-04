@@ -27,9 +27,17 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllRecupero()
         {
-            var recuperos = await _unitOfWork.RecuperoRepository.GetAllAsync();
-            var recuperosDto = _mapper.Map<List<RecuperoDto>>(recuperos);
-            return Ok(recuperosDto);
+            try
+            {
+                var recuperos = await _unitOfWork.RecuperoRepository.GetAllAsync();
+                var recuperosDto = _mapper.Map<List<RecuperoDto>>(recuperos);
+                return Ok(recuperosDto);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
         }
 
         // GET: api/Recupero/5
