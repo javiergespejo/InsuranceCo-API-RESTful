@@ -29,10 +29,6 @@ namespace GestionReclamosRemastered.Core.DTOs
         public double? DañoAsegurado { get; set; }
         public string TxtHora { get; set; }
         public int IdResponsabilidad { get; set; }
-        //public  Empresa IdEmpresaNavigation { get; set; }
-        //public  Representante IdRepresentanteNavigation { get; set; }
-        //public  TipoSiniestro IdTipoSiniestroNavigation { get; set; }
-        //public  Usuario IdUsuarioNavigation { get; set; }
         public  ICollection<Juicio> Juicio { get; set; }
         public  ICollection<Mediacion> Mediacion { get; set; }
         public  ICollection<Reclamante> Reclamante { get; set; }
