@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GestionReclamosRemastered.Core.DTOs
 {
-    class RecuperoDto
+    public class RecuperoDto
     {
         public DateTime FechaReclamo { get; set; }
         public string CiaSeguro { get; set; }
