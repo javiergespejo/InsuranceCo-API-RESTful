@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GestionReclamosRemastered.Core.Entities
 {
-    public partial class Recupero
+    public partial class Recupero : BaseEntity
     {
         public long IdRecupero { get; set; }
         public DateTime FechaReclamo { get; set; }
