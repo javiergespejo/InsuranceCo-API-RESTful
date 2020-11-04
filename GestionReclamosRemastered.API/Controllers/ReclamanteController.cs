@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -29,17 +30,15 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            try
+
+            var claimants = _unitOfWork.ReclamanteRepository.GetAll();
+            if (claimants.Count() > 0)
             {
-                var claimants = _unitOfWork.ReclamanteRepository.GetAll();
                 var claimantsDto = _mapper.Map<IEnumerable<ReclamanteDto>>(claimants);
                 var response = new ApiResponse<IEnumerable<ReclamanteDto>>(claimantsDto);
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return BadRequest();
 
         }
 
@@ -47,17 +46,14 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            try
+            var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
+            if (claimant != null)
             {
-                var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
                 var claimantDto = _mapper.Map<ReclamanteDto>(claimant);
                 var response = new ApiResponse<ReclamanteDto>(claimantDto);
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         // POST api/<ReclamanteController>
@@ -99,17 +95,12 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
+            var isDeleted = await _reclamanteService.SoftDelete(id);
+            if (isDeleted)
             {
-                var user = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
-                var result = await _reclamanteService.SoftDelete(user);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                return Ok();
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return BadRequest();
         }
     }
 }

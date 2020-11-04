@@ -17,26 +17,6 @@ namespace GestionReclamosRemastered.Core.Services
         {
             return await _unitOfWork.UserRepository.AuthenticationAsync(user, pass);
         }
-        public IEnumerable<Usuario> GetFullUsers()
-        {
-            var users = _unitOfWork.UserRepository.GetAll().ToList();
-            var userTypes = _unitOfWork.UserTypeRepository.GetAll().ToList();
-
-            foreach (var item in users)
-            {
-                item.IdTipoUsuarioNavigation = userTypes.Where(x => x.IdTipoUsuario == item.IdTipoUsuario).FirstOrDefault();
-            }
-
-            return users;
-        }
-        public async Task<Usuario> GetFullUserById(int id)
-        {
-
-            var user = await _unitOfWork.UserRepository.GetById(id);
-            var userTypes = _unitOfWork.UserTypeRepository.GetAll().ToList();
-            user.IdTipoUsuarioNavigation = userTypes.Where(x => x.IdTipoUsuario == user.IdTipoUsuario).FirstOrDefault();
-            return user;
-        }
 
         public async Task<bool> UpdateUser(Usuario user)
         {
@@ -45,12 +25,17 @@ namespace GestionReclamosRemastered.Core.Services
              return true;
         }
 
-        public async Task<bool> SoftDelete(Usuario user)
+        public async Task<bool> SoftDelete(int id)
         {
-            user.SnActivo = 0;
-            _unitOfWork.UserRepository.Update(user);
-            await _unitOfWork.SaveChangesAsync();
-            return true;
+            var user = await _unitOfWork.UserRepository.GetById(id);
+            if (user != null)
+            {
+                user.SnActivo = 0;
+                _unitOfWork.UserRepository.Update(user);
+                await _unitOfWork.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }

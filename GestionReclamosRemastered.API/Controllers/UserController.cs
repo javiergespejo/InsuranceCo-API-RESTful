@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -30,35 +31,29 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            try
+            var users = _unitOfWork.UserRepository.GetAll();
+            if (users.Count() > 0)
             {
-                var users = _userService.GetFullUsers();
                 var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
                 var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-            
+            return NotFound();
         }
+
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            try
+            var user = await _unitOfWork.UserRepository.GetById(id);
+            if (user != null)
             {
-                var user = await _userService.GetFullUserById(id);
                 var userDto = _mapper.Map<UserDto>(user);
                 var response = new ApiResponse<UserDto>(userDto);
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         // POST api/<UserController>
@@ -76,7 +71,7 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
         // PUT api/<UserController>/5
@@ -88,31 +83,26 @@ namespace GestionReclamosRemastered.API.Controllers
                 var user = _mapper.Map<Usuario>(userDto);
                 user.IdUsuario = id;
                 var result = await _userService.UpdateUser(user);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                return Ok();
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            
+
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            try
+            var isDeleted = await _userService.SoftDelete(id);
+            if (isDeleted)
             {
-                var user = await _unitOfWork.UserRepository.GetById(id);
-                var result = await _userService.SoftDelete(user);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                return Ok();
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return BadRequest();
+
         }
     }
 }

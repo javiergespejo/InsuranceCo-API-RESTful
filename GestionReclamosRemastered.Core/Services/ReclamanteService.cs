@@ -12,12 +12,17 @@ namespace GestionReclamosRemastered.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> SoftDelete(Reclamante claimant)
+        public async Task<bool> SoftDelete(int id)
         {
-            claimant.SnActivo = 0;
-            _unitOfWork.ReclamanteRepository.Update(claimant);
-            await _unitOfWork.SaveChangesAsync();
-            return true;
+            var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
+            if (claimant != null)
+            {
+                claimant.SnActivo = 0;
+                _unitOfWork.ReclamanteRepository.Update(claimant);
+                await _unitOfWork.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
         public async Task<bool> UpdateClaimant(Reclamante claimant)
