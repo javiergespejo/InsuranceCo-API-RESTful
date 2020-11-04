@@ -21,6 +21,10 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             CreateMap<Siniestro, SiniestroDto>().ReverseMap();
             CreateMap<JsonPatchDocument<Siniestro>, JsonPatchDocument<SiniestroDto>>().ReverseMap();
             CreateMap<Operation<SiniestroDto>, Operation<Siniestro>>();
+            // Recupero
+            CreateMap<Recupero, RecuperoDto>().ReverseMap();
+            CreateMap<JsonPatchDocument<Recupero>, JsonPatchDocument<RecuperoDto>>().ReverseMap();
+            CreateMap<Operation<RecuperoDto>, Operation<Recupero>>();
         }
     }
 }
