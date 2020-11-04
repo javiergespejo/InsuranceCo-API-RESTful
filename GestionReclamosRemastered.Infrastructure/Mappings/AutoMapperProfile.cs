@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Entities;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch.Operations;
 
 namespace GestionReclamosRemastered.Infrastructure.Mappings
 {
@@ -17,6 +19,8 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             CreateMap<ReclamanteDto, Reclamante>().ReverseMap();            
             // Siniestro
             CreateMap<Siniestro, SiniestroDto>().ReverseMap();
+            CreateMap<JsonPatchDocument<Siniestro>, JsonPatchDocument<SiniestroDto>>().ReverseMap();
+            CreateMap<Operation<SiniestroDto>, Operation<Siniestro>>();
         }
     }
 }
