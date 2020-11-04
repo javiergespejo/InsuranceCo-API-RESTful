@@ -28,9 +28,16 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllSiniestros()
         {
-            var siniestros = await _unitOfWork.SiniestroRepository.GetAllAsync();
-            var siniestrosDto = _mapper.Map<List<SiniestroDto>>(siniestros);
-            return Ok(siniestrosDto);
+            try
+            {
+                var siniestros = await _unitOfWork.SiniestroRepository.GetAllAsync();
+                var siniestrosDto = _mapper.Map<List<SiniestroDto>>(siniestros);
+                return Ok(siniestrosDto);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }            
         }
 
         // GET: api/Siniestro/5
