@@ -16,9 +16,9 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         {
         }
 
-        public Task<bool> SiniestroExist(Siniestro siniestro)
+        public async Task<bool> SiniestroExist(Siniestro siniestro)
         {
-            return _entities.AnyAsync(s => s.NroStro == siniestro.NroStro);            
+            return await _entities.AnyAsync(s => s.NroStro == siniestro.NroStro);            
         }
     }
 }
