@@ -27,7 +27,11 @@ namespace GestionReclamosRemastered.API.Controllers
             _userService = userService;
             _mapper = mapper;
         }
-        // GET: api/<UserController>
+
+        /// <summary>
+        /// Retrieve all users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -41,8 +45,10 @@ namespace GestionReclamosRemastered.API.Controllers
             return NotFound();
         }
 
-
-        // GET api/<UserController>/5
+        /// <summary>
+        /// Retrieve user by id
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -56,7 +62,10 @@ namespace GestionReclamosRemastered.API.Controllers
             return NotFound();
         }
 
-        // POST api/<UserController>
+        /// <summary>
+        /// Create user
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post(UserDto userDto)
         {
@@ -74,7 +83,10 @@ namespace GestionReclamosRemastered.API.Controllers
 
         }
 
-        // PUT api/<UserController>/5
+        /// <summary>
+        /// Edit user
+        /// </summary>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UserDto userDto)
         {
@@ -92,7 +104,10 @@ namespace GestionReclamosRemastered.API.Controllers
 
         }
 
-        // DELETE api/<UserController>/5
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

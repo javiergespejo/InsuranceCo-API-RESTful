@@ -25,6 +25,10 @@ namespace GestionReclamosRemastered.API.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Retrieve JWT token
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AuthenticationAsync(UserLogin userLogin)
         {
