@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecuperoController : ControllerBase
@@ -119,15 +120,14 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return NotFound();
             }
-            await _unitOfWork.SiniestroRepository.DeleteLong(id);
             try
             {
+                await _unitOfWork.RecuperoRepository.DeleteLong(id);
                 await _unitOfWork.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
