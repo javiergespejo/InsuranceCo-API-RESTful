@@ -28,20 +28,32 @@ namespace GestionReclamosRemastered.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Database connection
             services.AddDbContext<GestionReclamosContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GestionReclamos"))
                );
+            // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            // NewtonsoftJson (httppatch enabled)
             services.AddControllers().AddNewtonsoftJson();
+            // User
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IReclamanteService, ReclamanteService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            // UserType
             services.AddTransient<IUserTypeRepository, UserTypeRepository>();
+            // Reclamante
+            services.AddTransient<IReclamanteService, ReclamanteService>();
             services.AddTransient<IReclamanteRepository, ReclamanteRepository>();
+            // Siniestro
             services.AddTransient<ISiniestroRepository, SiniestroRepository>();
+            services.AddTransient<ISiniestroService, SiniestroService>();
+            // Recupero
             services.AddTransient<IRecuperoRepository, RecuperoRepository>();
+            // GenericRepository
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // UnitOfWork
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            // Authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
