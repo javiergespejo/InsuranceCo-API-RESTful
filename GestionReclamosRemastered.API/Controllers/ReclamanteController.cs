@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
     [Authorize]
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReclamanteController : ControllerBase
@@ -32,6 +34,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<ReclamanteDto>))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Get()
         {
 
@@ -51,6 +55,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ReclamanteDto))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get(int id)
         {
             var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
@@ -68,6 +74,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post(ReclamanteDto claimantDto)
         {
             try
@@ -88,6 +96,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Put(int id, ReclamanteDto claimantDto)
         {
             try
@@ -109,6 +119,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
             var isDeleted = await _reclamanteService.SoftDelete(id);

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -33,6 +34,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<UserDto>>))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Get()
         {
             var users = _unitOfWork.UserRepository.GetAll();
@@ -50,6 +53,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<UserDto>))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get(int id)
         {
             var user = await _unitOfWork.UserRepository.GetById(id);
@@ -67,6 +72,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post(UserDto userDto)
         {
             try
@@ -88,6 +95,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Put(int id, UserDto userDto)
         {
             try
@@ -109,6 +118,8 @@ namespace GestionReclamosRemastered.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
             var isDeleted = await _userService.SoftDelete(id);
