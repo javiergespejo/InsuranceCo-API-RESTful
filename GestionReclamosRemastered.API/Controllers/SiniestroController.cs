@@ -18,10 +18,12 @@ namespace GestionReclamosRemastered.API.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public SiniestroController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly ISiniestroService _siniestroService;
+        public SiniestroController(IUnitOfWork unitOfWork, IMapper mapper, ISiniestroService siniestroService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _siniestroService = siniestroService;
         }
 
         // GET: api/Siniestro
@@ -30,8 +32,11 @@ namespace GestionReclamosRemastered.API.Controllers
         {
             try
             {
-                var siniestros = await _unitOfWork.SiniestroRepository.GetAllAsync();
-                var siniestrosDto = _mapper.Map<List<SiniestroDto>>(siniestros);
+                var siniestrosDto = await _siniestroService.GetAllSiniestros();
+                if (siniestrosDto == null)
+                {
+                    return NotFound();
+                }
                 return Ok(siniestrosDto);
             }
             catch (Exception)
@@ -44,13 +49,12 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSiniestroById(long id)
         {
-            var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
-            if (siniestro == null)
+            var siniestroDto = await _siniestroService.GetSiniestroById(id);
+            if (siniestroDto == null)
             {
                 return NotFound();
             }
 
-            var siniestroDto = _mapper.Map<SiniestroDto>(siniestro);
             return Ok(siniestroDto);
         }
 
