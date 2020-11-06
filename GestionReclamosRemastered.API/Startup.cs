@@ -39,7 +39,10 @@ namespace GestionReclamosRemastered.API
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             // NewtonsoftJson (httppatch enabled)
-            services.AddControllers().AddNewtonsoftJson();
+            // LoopHandler
+            services.AddControllers().AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
             // User
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -84,7 +87,7 @@ namespace GestionReclamosRemastered.API
                 };
 
             });
-
+                        
             services.AddSwaggerGen(doc =>
             {
                 doc.SwaggerDoc("v1", new OpenApiInfo { Title = "Gestion Reclamos API", Version = "v1" });
