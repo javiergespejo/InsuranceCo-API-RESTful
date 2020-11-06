@@ -24,6 +24,8 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             CreateMap<Recupero, RecuperoDto>().ReverseMap();
             CreateMap<JsonPatchDocument<Recupero>, JsonPatchDocument<RecuperoDto>>().ReverseMap();
             CreateMap<Operation<RecuperoDto>, Operation<Recupero>>();
+            // Representante
+            CreateMap<Representante, RepresentativeDto>().ReverseMap();
         }
     }
 }
