@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

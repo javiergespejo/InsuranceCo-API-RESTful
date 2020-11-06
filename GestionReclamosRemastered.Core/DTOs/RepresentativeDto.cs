@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GestionReclamosRemastered.Core.DTOs
+﻿namespace GestionReclamosRemastered.Core.DTOs
 {
     public class RepresentativeDto
     {

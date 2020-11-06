@@ -1,5 +1,4 @@
-﻿using GestionReclamosRemastered.Core.Entities;
-using System;
+﻿using System;
 
 namespace GestionReclamosRemastered.Core.DTOs
 {
