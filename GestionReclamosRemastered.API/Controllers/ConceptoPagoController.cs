@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using GestionReclamosRemastered.API.Responses;
-using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers

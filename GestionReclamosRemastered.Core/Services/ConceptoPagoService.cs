@@ -16,13 +16,7 @@ namespace GestionReclamosRemastered.Core.Services
 
         public IEnumerable<ConceptoPago> GetFullConceptoPagos()
         {
-            var conceptoPagos = _unitOfWork.ConceptoPagoRepository.GetAll().ToList();
-            var clasePagos = _unitOfWork.ClasePagoRepository.GetAll().ToList();
-
-            foreach (var item in conceptoPagos)
-            {
-                item.IdClasePagoNavigation = clasePagos.Where(x => x.IdClasePago == item.IdClasePago).FirstOrDefault();
-            }
+            var conceptoPagos = _unitOfWork.ConceptoPagoRepository.GetAll().ToList();            
             return conceptoPagos;
         }
 

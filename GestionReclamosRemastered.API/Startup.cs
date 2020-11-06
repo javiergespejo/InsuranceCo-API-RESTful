@@ -42,9 +42,8 @@ namespace GestionReclamosRemastered.API
 
             // NewtonsoftJson (httppatch enabled)
             // LoopHandler
-            services.AddControllers().AddNewtonsoftJson(options =>
-                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                    );
+            services.AddControllers().AddNewtonsoftJson();
+
             // User
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
