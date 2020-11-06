@@ -8,7 +8,6 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
     {
         private readonly GestionReclamosContext _context;
         private readonly IUserRepository _userRepository;
-        private readonly IUserTypeRepository _userTypeRepository;
         private readonly IReclamanteRepository _reclamanteRepository;
         private readonly ISiniestroRepository _siniestroRepository;
         private readonly IRecuperoRepository _recuperoRepository;
@@ -17,7 +16,6 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
             _context = context;
         }
         public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context);
-        public IUserTypeRepository UserTypeRepository => _userTypeRepository ?? new UserTypeRepository(_context);
         public IReclamanteRepository ReclamanteRepository => _reclamanteRepository ?? new ReclamanteRepository(_context);
         public ISiniestroRepository SiniestroRepository => _siniestroRepository ?? new SiniestroRepository(_context);
         public IRecuperoRepository RecuperoRepository => _recuperoRepository ?? new RecuperoRepository(_context);

@@ -13,8 +13,7 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             // Usuario
             CreateMap<Usuario, UserDto>().ForMember(x => x.Password, opt => opt.Ignore());
             CreateMap<UserDto, Usuario>();
-            // Tipo de usuario
-            CreateMap<TipoUsuario, TipoUsuarioDto>().ReverseMap();
+            
             // Reclamante
             CreateMap<ReclamanteDto, Reclamante>().ReverseMap();            
             // Siniestro

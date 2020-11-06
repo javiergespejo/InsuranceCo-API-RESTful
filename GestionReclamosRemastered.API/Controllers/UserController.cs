@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -26,43 +28,52 @@ namespace GestionReclamosRemastered.API.Controllers
             _userService = userService;
             _mapper = mapper;
         }
-        // GET: api/<UserController>
+
+        /// <summary>
+        /// Retrieve all users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<UserDto>>))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Get()
         {
-            try
+            var users = _unitOfWork.UserRepository.GetAll();
+            if (users.Count() > 0)
             {
-                var users = _userService.GetFullUsers();
                 var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
                 var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-            
+            return NotFound();
         }
 
-        // GET api/<UserController>/5
+        /// <summary>
+        /// Retrieve user by id
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<UserDto>))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> Get(int id)
         {
-            try
+            var user = await _unitOfWork.UserRepository.GetById(id);
+            if (user != null)
             {
-                var user = await _userService.GetFullUserById(id);
                 var userDto = _mapper.Map<UserDto>(user);
                 var response = new ApiResponse<UserDto>(userDto);
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
-        // POST api/<UserController>
+        /// <summary>
+        /// Create user
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post(UserDto userDto)
         {
             try
@@ -76,11 +87,16 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
-        // PUT api/<UserController>/5
+        /// <summary>
+        /// Edit user
+        /// </summary>
+        /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Put(int id, UserDto userDto)
         {
             try
@@ -88,31 +104,31 @@ namespace GestionReclamosRemastered.API.Controllers
                 var user = _mapper.Map<Usuario>(userDto);
                 user.IdUsuario = id;
                 var result = await _userService.UpdateUser(user);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                return Ok();
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            
+
         }
 
-        // DELETE api/<UserController>/5
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Delete(int id)
         {
-            try
+            var isDeleted = await _userService.SoftDelete(id);
+            if (isDeleted)
             {
-                var user = await _unitOfWork.UserRepository.GetById(id);
-                var result = await _userService.SoftDelete(user);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                return Ok();
             }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return BadRequest();
+
         }
     }
 }

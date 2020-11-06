@@ -7,7 +7,6 @@
         public string Nombre { get; set; }
         public string Password { get; set; }
         public int IdTipoUsuario { get; set; }
-        public TipoUsuarioDto IdTipoUsuarioNavigation { get; set; }
         public int SnActivo { get; set; }
     }
 }
