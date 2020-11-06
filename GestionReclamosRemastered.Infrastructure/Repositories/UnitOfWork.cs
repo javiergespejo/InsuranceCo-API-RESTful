@@ -24,11 +24,8 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         public ISiniestroRepository SiniestroRepository => _siniestroRepository ?? new SiniestroRepository(_context);
         public IRecuperoRepository RecuperoRepository => _recuperoRepository ?? new RecuperoRepository(_context);
         public IRepresentativeRepository RepresentativeRepository => _representativeRepository ?? new RepresentativeRepository(_context);
-
         public IMontoRepository MontoRepository => _montoRepository ?? new MontoRepository(_context);
-
         public IConceptoPagoRepository ConceptoPagoRepository => _conceptoPagoRepository ?? new ConceptoPagoRepository(_context);
-
         public IClasePagoRepository ClasePagoRepository => _clasePago ?? new ClasePagoRepository(_context);
         public void Dispose()
         {

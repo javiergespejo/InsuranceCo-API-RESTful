@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers

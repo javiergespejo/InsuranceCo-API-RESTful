@@ -36,8 +36,10 @@ namespace GestionReclamosRemastered.API
             services.AddDbContext<GestionReclamosContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GestionReclamos"))
                );
+
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             // NewtonsoftJson (httppatch enabled)
             // LoopHandler
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -50,24 +52,32 @@ namespace GestionReclamosRemastered.API
             // Reclamante
             services.AddTransient<IReclamanteService, ReclamanteService>();
             services.AddTransient<IReclamanteRepository, ReclamanteRepository>();
+
             // Siniestro
             services.AddTransient<ISiniestroRepository, SiniestroRepository>();
             services.AddTransient<ISiniestroService, SiniestroService>();
+
             // Recupero
             services.AddTransient<IRecuperoRepository, RecuperoRepository>();
+
             // Representante
             services.AddTransient<IRepresentativeRepository, RepresentativeRepository>();
             services.AddTransient<IRepresentativeService, RepresentativeService>();
+
             // GenericRepository
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
             // UnitOfWork
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             // Monto
             services.AddTransient<IMontoRepository, MontoRepository>();
             services.AddTransient<IMontoService, MontoService>();
+
             // Concepto Pago
             services.AddTransient<IConceptoPagoRepository, ConceptoPagoRepository>();
             services.AddTransient<IConceptoPagoService, ConceptoPagoService>();
+
             // Authentication
             services.AddAuthentication(options =>
             {
@@ -87,7 +97,8 @@ namespace GestionReclamosRemastered.API
                 };
 
             });
-                        
+            
+            // Swagger
             services.AddSwaggerGen(doc =>
             {
                 doc.SwaggerDoc("v1", new OpenApiInfo { Title = "Gestion Reclamos API", Version = "v1" });
