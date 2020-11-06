@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -14,16 +16,16 @@ namespace GestionReclamosRemastered.API.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ConceptoPagoController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
+        private readonly IConceptoPagoService _conceptoPagoService;
         private readonly IMapper _mapper;
 
-        public UserController(IUnitOfWork unitOfWork, IMapper mapper, IUserService userService)
+        public ConceptoPagoController(IUnitOfWork unitOfWork, IMapper mapper, IConceptoPagoService conceptoPagoService)
         {
             _unitOfWork = unitOfWork;
-            _userService = userService;
+            _conceptoPagoService = conceptoPagoService;
             _mapper = mapper;
         }
         // GET: api/<UserController>
@@ -32,27 +34,26 @@ namespace GestionReclamosRemastered.API.Controllers
         {
             try
             {
-                var users = _userService.GetFullUsers();
-                var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
-                var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
+                var conceptoPago = _conceptoPagoService.GetFullConceptoPagos();
+                var conceptoPagoDto = _mapper.Map<IEnumerable<ConceptoPagoDto>>(conceptoPago);
+                var response = new ApiResponse<IEnumerable<ConceptoPagoDto>>(conceptoPagoDto);
                 return Ok(response);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            
-        }
 
+        }
         // GET api/<UserController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
             try
             {
-                var user = await _userService.GetFullUserById(id);
-                var userDto = _mapper.Map<UserDto>(user);
-                var response = new ApiResponse<UserDto>(userDto);
+                var conceptoPago = await _conceptoPagoService.GetConceptoPagosById(id);
+                var conceptoPagoDto = _mapper.Map<ConceptoPagoDto>(conceptoPago);
+                var response = new ApiResponse<ConceptoPagoDto>(conceptoPagoDto);
                 return Ok(response);
             }
             catch (Exception)
@@ -60,15 +61,14 @@ namespace GestionReclamosRemastered.API.Controllers
                 return NotFound();
             }
         }
-
         // POST api/<UserController>
         [HttpPost]
-        public async Task<IActionResult> Post(UserDto userDto)
+        public async Task<IActionResult> Post(ConceptoPagoDto conceptoPagoDto)
         {
             try
             {
-                var user = _mapper.Map<Usuario>(userDto);
-                await _unitOfWork.UserRepository.Add(user);
+                var conceptoPago = _mapper.Map<ConceptoPago>(conceptoPagoDto);
+                await _unitOfWork.ConceptoPagoRepository.Add(conceptoPago);
                 await _unitOfWork.SaveChangesAsync();
                 return Ok();
             }
@@ -76,18 +76,18 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UserDto userDto)
+        public async Task<IActionResult> Put(int id, ConceptoPagoDto conceptoPagoDto)
         {
             try
             {
-                var user = _mapper.Map<Usuario>(userDto);
-                user.IdUsuario = id;
-                var result = await _userService.UpdateUser(user);
+                var conceptoPago = _mapper.Map<ConceptoPago>(conceptoPagoDto);
+                conceptoPago.IdConcepto = id;
+                var result = await _conceptoPagoService.UpdateConceptoPago(conceptoPago);
                 var response = new ApiResponse<bool>(result);
                 return Ok(response);
             }
@@ -95,7 +95,7 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
         // DELETE api/<UserController>/5
@@ -104,8 +104,8 @@ namespace GestionReclamosRemastered.API.Controllers
         {
             try
             {
-                var user = await _unitOfWork.UserRepository.GetById(id);
-                var result = await _userService.SoftDelete(user);
+                var conceptoPago = await _unitOfWork.ConceptoPagoRepository.GetById(id);
+                var result = await _conceptoPagoService.SoftDelete(conceptoPago);
                 var response = new ApiResponse<bool>(result);
                 return Ok(response);
             }

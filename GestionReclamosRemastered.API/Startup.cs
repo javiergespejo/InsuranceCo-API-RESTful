@@ -39,6 +39,10 @@ namespace GestionReclamosRemastered.API
             services.AddTransient<IUserTypeRepository, UserTypeRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IMontoRepository, MontoRepository>();
+            services.AddTransient<IMontoService, MontoService>();
+            services.AddTransient<IConceptoPagoRepository, ConceptoPagoRepository>();
+            services.AddTransient<IConceptoPagoService, ConceptoPagoService>();
 
             services.AddAuthentication(options =>
             {
@@ -56,7 +60,14 @@ namespace GestionReclamosRemastered.API
                     ValidAudience = Configuration["Authentication:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
                 };
+
             });
+
+            //LoopHandler
+            services.AddControllersWithViews()
+                     .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

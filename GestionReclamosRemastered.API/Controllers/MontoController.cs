@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
@@ -14,45 +16,45 @@ namespace GestionReclamosRemastered.API.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class MontoController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
+        private readonly IMontoService _montoService;
         private readonly IMapper _mapper;
 
-        public UserController(IUnitOfWork unitOfWork, IMapper mapper, IUserService userService)
+        public MontoController (IUnitOfWork unitOfWork, IMapper mapper, IMontoService montoService)
         {
             _unitOfWork = unitOfWork;
-            _userService = userService;
+            _montoService = montoService;
             _mapper = mapper;
         }
-        // GET: api/<UserController>
+
+        //GET: api/<MontoController>
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                var users = _userService.GetFullUsers();
-                var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
-                var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
+                var montos = _montoService.GetFullMonto();
+                var montosDto = _mapper.Map<IEnumerable<MontoDto>>(montos);
+                var response = new ApiResponse<IEnumerable<MontoDto>>(montosDto);
                 return Ok(response);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            
         }
 
-        // GET api/<UserController>/5
+        //GET api/MontoController/3
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
             try
             {
-                var user = await _userService.GetFullUserById(id);
-                var userDto = _mapper.Map<UserDto>(user);
-                var response = new ApiResponse<UserDto>(userDto);
+                var monto = await _montoService.GetFullMontoById(id);
+                var montoDto = _mapper.Map<MontoDto>(monto);
+                var response = new ApiResponse<MontoDto>(montoDto);
                 return Ok(response);
             }
             catch (Exception)
@@ -60,15 +62,14 @@ namespace GestionReclamosRemastered.API.Controllers
                 return NotFound();
             }
         }
-
-        // POST api/<UserController>
+        // POST api/<MontoController>
         [HttpPost]
-        public async Task<IActionResult> Post(UserDto userDto)
+        public async Task<IActionResult> Post(MontoDto montoDto)
         {
             try
             {
-                var user = _mapper.Map<Usuario>(userDto);
-                await _unitOfWork.UserRepository.Add(user);
+                var monto = _mapper.Map<Monto>(montoDto);
+                await _unitOfWork.MontoRepository.Add(monto);
                 await _unitOfWork.SaveChangesAsync();
                 return Ok();
             }
@@ -76,18 +77,18 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
-        // PUT api/<UserController>/5
+        // PUT api/<MontoController>/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UserDto userDto)
+        public async Task<IActionResult> Put(int id, MontoDto montoDto)
         {
             try
             {
-                var user = _mapper.Map<Usuario>(userDto);
-                user.IdUsuario = id;
-                var result = await _userService.UpdateUser(user);
+                var monto = _mapper.Map<Monto>(montoDto);
+                monto.IdReclamante = id;
+                var result = await _montoService.UpdateMonto(monto);
                 var response = new ApiResponse<bool>(result);
                 return Ok(response);
             }
@@ -95,17 +96,17 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/<MontoController>/3
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             try
             {
-                var user = await _unitOfWork.UserRepository.GetById(id);
-                var result = await _userService.SoftDelete(user);
+                var user = await _unitOfWork.MontoRepository.GetById(id);
+                var result = await _montoService.Delete(id);
                 var response = new ApiResponse<bool>(result);
                 return Ok(response);
             }
@@ -114,5 +115,6 @@ namespace GestionReclamosRemastered.API.Controllers
                 return BadRequest();
             }
         }
+
     }
 }

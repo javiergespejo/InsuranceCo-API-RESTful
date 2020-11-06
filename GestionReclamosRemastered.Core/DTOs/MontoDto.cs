@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GestionReclamosRemastered.Core.Entities;
+using System;
 
-namespace GestionReclamosRemastered.Core.Entities
+namespace GestionReclamosRemastered.Core.DTOs
 {
-    public partial class Monto : BaseEntity
+    public class MontoDto
     {
         public int IdReclamante { get; set; }
         public int IdClasePago { get; set; }
@@ -17,10 +17,10 @@ namespace GestionReclamosRemastered.Core.Entities
         public int IdSituacion { get; set; }
         public int CodEstim { get; set; }
 
-        public virtual ConceptoPago IdC { get; set; }
-        public virtual ClasePago IdClasePagoNavigation { get; set; }
-        public virtual TipoInstancia IdInstanciaNavigation { get; set; }
-        public virtual TipoMonto IdTipoMontoNavigation { get; set; }
-        public virtual Usuario IdUsuarioNavigation { get; set; }
+        //public ConceptoPagoDto IdC { get; set; }
+        //public ClasePagoDto IdClasePagoNavigation { get; set; }
+        //public TipoInstanciaDto IdInstanciaNavigation { get; set; }
+        //public TipoMontoDto IdTipoMontoNavigation { get; set; }
+        //public UserDto IdUsuarioNavigation { get; set; }
     }
 }

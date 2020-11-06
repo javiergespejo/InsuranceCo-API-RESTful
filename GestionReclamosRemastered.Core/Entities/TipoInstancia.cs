@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GestionReclamosRemastered.Core.Entities
 {
-    public partial class TipoInstancia
+    public partial class TipoInstancia : BaseEntity
     {
         public TipoInstancia()
         {
