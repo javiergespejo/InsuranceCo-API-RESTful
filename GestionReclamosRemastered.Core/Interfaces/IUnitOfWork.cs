@@ -10,6 +10,9 @@ namespace GestionReclamosRemastered.Core.Interfaces
         ISiniestroRepository SiniestroRepository { get; }
         IRecuperoRepository RecuperoRepository { get; }
         IRepresentativeRepository RepresentativeRepository { get; }
+        IMontoRepository MontoRepository { get; }
+        IConceptoPagoRepository ConceptoPagoRepository { get; }
+        IClasePagoRepository ClasePagoRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }

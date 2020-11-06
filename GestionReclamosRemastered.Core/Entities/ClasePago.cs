@@ -2,7 +2,7 @@
 
 namespace GestionReclamosRemastered.Core.Entities
 {
-    public partial class ClasePago
+    public partial class ClasePago : BaseEntity
     {
         public ClasePago()
         {

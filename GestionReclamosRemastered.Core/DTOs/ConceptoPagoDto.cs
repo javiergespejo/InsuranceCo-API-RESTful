@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.Core.Entities
 {
-    public partial class ConceptoPago : BaseEntity
+    public class ConceptoPagoDto
     {
-        public ConceptoPago()
-        {
-            Monto = new HashSet<Monto>();
-        }
-
         public int IdClasePago { get; set; }
         public int IdConcepto { get; set; }
         public string TxtDescripcion { get; set; }
@@ -18,6 +16,5 @@ namespace GestionReclamosRemastered.Core.Entities
         public DateTime FechaCarga { get; set; }
 
         public virtual ClasePago IdClasePagoNavigation { get; set; }
-        public virtual ICollection<Monto> Monto { get; set; }
     }
 }

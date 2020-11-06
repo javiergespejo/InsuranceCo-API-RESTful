@@ -59,6 +59,12 @@ namespace GestionReclamosRemastered.API
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             // UnitOfWork
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            // Monto
+            services.AddTransient<IMontoRepository, MontoRepository>();
+            services.AddTransient<IMontoService, MontoService>();
+            // Concepto Pago
+            services.AddTransient<IConceptoPagoRepository, ConceptoPagoRepository>();
+            services.AddTransient<IConceptoPagoService, ConceptoPagoService>();
             // Authentication
             services.AddAuthentication(options =>
             {
@@ -76,6 +82,7 @@ namespace GestionReclamosRemastered.API
                     ValidAudience = Configuration["Authentication:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
                 };
+
             });
 
             services.AddSwaggerGen(doc =>
