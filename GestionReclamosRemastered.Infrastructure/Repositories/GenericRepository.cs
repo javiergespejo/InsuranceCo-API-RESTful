@@ -25,6 +25,10 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         {
             return await _entities.FindAsync(id);
         }
+        public async Task<T> GetByLongId(long id)
+        {
+            return await _entities.FindAsync(id);
+        }
         public async Task Add(T entity)
         {
             await _entities.AddAsync(entity);

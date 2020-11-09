@@ -14,72 +14,74 @@ using System.Threading.Tasks;
 namespace GestionReclamosRemastered.API.Controllers
 {
     [Authorize]
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ReclamanteController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
-
-        public UserController(IUnitOfWork unitOfWork, IMapper mapper, IUserService userService)
+        private readonly IReclamanteService _reclamanteService;
+        public ReclamanteController(IUnitOfWork unitOfWork, IMapper mapper, IReclamanteService reclamanteService)
         {
             _unitOfWork = unitOfWork;
-            _userService = userService;
             _mapper = mapper;
+            _reclamanteService = reclamanteService;
         }
 
         /// <summary>
-        /// Retrieve all users
+        /// Retrieve all claimants
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<UserDto>>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<ReclamanteDto>))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Get()
         {
-            var users = _unitOfWork.UserRepository.GetAll();
-            if (users.Count() > 0)
+
+            var claimants = _unitOfWork.ReclamanteRepository.GetAll();
+            if (claimants.Count() > 0)
             {
-                var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
-                var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
+                var claimantsDto = _mapper.Map<IEnumerable<ReclamanteDto>>(claimants);
+                var response = new ApiResponse<IEnumerable<ReclamanteDto>>(claimantsDto);
                 return Ok(response);
             }
-            return NotFound();
+            return BadRequest();
+
         }
 
         /// <summary>
-        /// Retrieve user by id
+        /// Retrieve claimant by id
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<UserDto>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ReclamanteDto))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get(int id)
         {
-            var user = await _unitOfWork.UserRepository.GetById(id);
-            if (user != null)
+            var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId(id);
+            if (claimant != null)
             {
-                var userDto = _mapper.Map<UserDto>(user);
-                var response = new ApiResponse<UserDto>(userDto);
+                var claimantDto = _mapper.Map<ReclamanteDto>(claimant);
+                var response = new ApiResponse<ReclamanteDto>(claimantDto);
                 return Ok(response);
             }
             return NotFound();
         }
 
         /// <summary>
-        /// Create user
+        /// Create claimant
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> Post(UserDto userDto)
+        public async Task<IActionResult> Post(ReclamanteDto claimantDto)
         {
             try
             {
-                var user = _mapper.Map<Usuario>(userDto);
-                await _unitOfWork.UserRepository.Add(user);
+                var claimant = _mapper.Map<Reclamante>(claimantDto);
+                await _unitOfWork.ReclamanteRepository.Add(claimant);
                 await _unitOfWork.SaveChangesAsync();
                 return Ok();
             }
@@ -87,34 +89,33 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 return BadRequest();
             }
-
         }
 
         /// <summary>
-        /// Edit user
+        /// Edit claimant
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> Put(int id, UserDto userDto)
+        public async Task<IActionResult> Put(int id, ReclamanteDto claimantDto)
         {
             try
             {
-                var user = _mapper.Map<Usuario>(userDto);
-                user.IdUsuario = id;
-                var result = await _userService.UpdateUser(user);
-                return Ok();
+                var claimant = _mapper.Map<Reclamante>(claimantDto);
+                claimant.IdReclamante = id;
+                var result = await _reclamanteService.UpdateClaimant(claimant);
+                var response = new ApiResponse<bool>(result);
+                return Ok(response);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-
         }
 
         /// <summary>
-        /// Delete user by id
+        /// Delete claimant by id
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
@@ -122,13 +123,12 @@ namespace GestionReclamosRemastered.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
-            var isDeleted = await _userService.SoftDelete(id);
+            var isDeleted = await _reclamanteService.SoftDelete(id);
             if (isDeleted)
             {
                 return Ok();
             }
             return BadRequest();
-
         }
     }
 }

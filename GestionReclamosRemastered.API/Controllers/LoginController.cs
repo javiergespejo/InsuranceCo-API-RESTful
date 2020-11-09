@@ -6,12 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : Controller
@@ -25,7 +27,12 @@ namespace GestionReclamosRemastered.API.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Retrieve JWT token
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> AuthenticationAsync(UserLogin userLogin)
         {
             if (await UserIsValid(userLogin))

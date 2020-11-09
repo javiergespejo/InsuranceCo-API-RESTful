@@ -12,11 +12,13 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         //private readonly IRepository<User> _userRepository;
         //private readonly IRepository<Comment> _commentRepository;
         private readonly IUserTypeRepository _userTypeRepository;
+        private readonly IReclamanteRepository _reclamanteRepository;
         public UnitOfWork(GestionReclamosContext context)
         {
             _context = context;
         }
         public IUserRepository UserRepository => _userRepository ?? new UserRepository(_context);
+        public IReclamanteRepository ReclamanteRepository => _reclamanteRepository ?? new ReclamanteRepository(_context);
         public IUserTypeRepository UserTypeRepository => _userTypeRepository ?? new UserTypeRepository(_context);
         public IRepresentativeRepository RepresentativeRepository => _representativeRepository ?? new RepresentativeRepository(_context);
 

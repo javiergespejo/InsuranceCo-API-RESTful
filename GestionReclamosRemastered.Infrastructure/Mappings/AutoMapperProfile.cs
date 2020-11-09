@@ -15,6 +15,8 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
 
             CreateMap<Representante, RepresentativeDto>();
             CreateMap<RepresentativeDto, Representante>();
+            CreateMap<ReclamanteDto, Reclamante>();
+            CreateMap<Reclamante, ReclamanteDto>();
         }
     }
 }

@@ -2,8 +2,7 @@
 
 namespace GestionReclamosRemastered.Core.Interfaces
 {
-    public interface IUserTypeRepository : IGenericRepository<TipoUsuario>
+    public interface IReclamanteRepository : IGenericRepository<Reclamante>
     {
-
     }
 }
