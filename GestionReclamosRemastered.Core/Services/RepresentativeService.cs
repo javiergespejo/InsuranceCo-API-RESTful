@@ -36,12 +36,17 @@ namespace GestionReclamosRemastered.Core.Services
         }
 
         /// <summary>
-        /// Gets a list of active representatives
+        /// Gets a list of active representatives or gets a filtered list by name 
         /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<Representante>> GetAllRepresentatives()
+        /// <param name="name">If name is not null, filters the name by its value</param>
+        /// <returns>A list of active representatives, filtered or not</returns>
+        public async Task<IEnumerable<Representante>> GetAllRepresentatives(string name)
         {
-            return await _unitOfWork.RepresentativeRepository.GetRepresentativesAsync();
+            if (name == null)
+            {
+                return await _unitOfWork.RepresentativeRepository.GetRepresentativesAsync();
+            }
+            return await _unitOfWork.RepresentativeRepository.GetByName(name);
         }
 
         /// <summary>
@@ -51,7 +56,15 @@ namespace GestionReclamosRemastered.Core.Services
         /// <returns></returns>
         public async Task<Representante> GetRepresentativeById(int id)
         {
-            return await _unitOfWork.RepresentativeRepository.GetById(id);
+            var rep =  await _unitOfWork.RepresentativeRepository.GetById(id);
+            if (rep != null)
+            {
+                return rep;
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
         /// <summary>
         /// Updates a representative information
