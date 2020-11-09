@@ -2,6 +2,7 @@
 using GestionReclamosRemastered.Core.Interfaces;
 using GestionReclamosRemastered.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.Infrastructure.Repositories
@@ -15,6 +16,11 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         public async Task<bool> SiniestroExist(Siniestro siniestro)
         {
             return await _entities.AnyAsync(s => s.NroStro == siniestro.NroStro);            
+        }
+        public async Task<long> NroStroAsign()
+        {
+            var lastSiniestro = await _entities.OrderByDescending(x => x.NroStro).FirstOrDefaultAsync();
+            return lastSiniestro.NroStro + 1;
         }
     }
 }
