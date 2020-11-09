@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace GestionReclamosRemastered.Core.Entities
+namespace GestionReclamosRemastered.Core.DTOs
 {
-    public partial class Recupero : BaseEntity
+    public class RecuperoDto
     {
-        public long IdRecupero { get; set; }
         public DateTime FechaReclamo { get; set; }
         public string CiaSeguro { get; set; }
         public double MontoReclamado { get; set; }

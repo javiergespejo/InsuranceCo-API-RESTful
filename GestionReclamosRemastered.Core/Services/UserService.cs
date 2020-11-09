@@ -1,7 +1,5 @@
 ﻿using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.Core.Services

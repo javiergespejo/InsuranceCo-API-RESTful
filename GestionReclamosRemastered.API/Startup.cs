@@ -32,24 +32,52 @@ namespace GestionReclamosRemastered.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Database connection
             services.AddDbContext<GestionReclamosContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GestionReclamos"))
                );
+
+            // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddControllers();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IReclamanteService, ReclamanteService>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            
+            // NewtonsoftJson (httppatch enabled)
+            // LoopHandler
+            services.AddControllers().AddNewtonsoftJson();
 
+            // User
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
+            // Reclamante
+            services.AddTransient<IReclamanteService, ReclamanteService>();
+            services.AddTransient<IReclamanteRepository, ReclamanteRepository>();
+
+            // Siniestro
+            services.AddTransient<ISiniestroRepository, SiniestroRepository>();
+            services.AddTransient<ISiniestroService, SiniestroService>();
+
+            // Recupero
+            services.AddTransient<IRecuperoRepository, RecuperoRepository>();
+
+            // Representante
             services.AddTransient<IRepresentativeRepository, RepresentativeRepository>();
             services.AddTransient<IRepresentativeService, RepresentativeService>();
 
-            services.AddTransient<IReclamanteRepository, ReclamanteRepository>();
+            // GenericRepository
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            // UnitOfWork
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+            // Monto
+            services.AddTransient<IMontoRepository, MontoRepository>();
+            services.AddTransient<IMontoService, MontoService>();
+
+            // Concepto Pago
+            services.AddTransient<IConceptoPagoRepository, ConceptoPagoRepository>();
+            services.AddTransient<IConceptoPagoService, ConceptoPagoService>();
+
+            // Authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -66,8 +94,10 @@ namespace GestionReclamosRemastered.API
                     ValidAudience = Configuration["Authentication:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
                 };
-            });
 
+            });
+            
+            // Swagger
             services.AddSwaggerGen(doc =>
             {
                 doc.SwaggerDoc("v1", new OpenApiInfo { Title = "Gestion Reclamos API", Version = "v1" });
@@ -102,7 +132,6 @@ namespace GestionReclamosRemastered.API
                     }
                 });
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

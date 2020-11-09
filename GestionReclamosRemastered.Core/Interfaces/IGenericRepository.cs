@@ -12,7 +12,7 @@ namespace GestionReclamosRemastered.Core.Interfaces
         Task Add(T entity);
         void Update(T entity);
         Task Delete(int id);
-
-
+        Task DeleteLong(long id);
+        Task<List<T>> GetAllAsync();
     }
 }
