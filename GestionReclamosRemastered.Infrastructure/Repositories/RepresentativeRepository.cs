@@ -40,7 +40,7 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         /// <returns></returns>
         public async Task<IEnumerable<Representante>> GetByName(string name)
         {
-            return await _entities.Where(x => x.TxtNombre.Equals(name)).ToListAsync();
+            return await _entities.Where(x => x.TxtNombre.Contains(name)).ToListAsync();
         }
     }
 }

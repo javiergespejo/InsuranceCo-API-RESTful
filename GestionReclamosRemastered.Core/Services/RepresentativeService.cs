@@ -44,9 +44,19 @@ namespace GestionReclamosRemastered.Core.Services
         {
             if (name == null)
             {
-                return await _unitOfWork.RepresentativeRepository.GetRepresentativesAsync();
+                var repWithoutName =  await _unitOfWork.RepresentativeRepository.GetRepresentativesAsync();
+                if (repWithoutName.Count() > 0)
+                {
+                    return repWithoutName;
+                }
+                throw new Exception();
             }
-            return await _unitOfWork.RepresentativeRepository.GetByName(name);
+            var repWithName = await _unitOfWork.RepresentativeRepository.GetByName(name);
+            if (repWithName.Count() > 0)
+            {
+                return repWithName;
+            }
+            throw new Exception();
         }
 
         /// <summary>

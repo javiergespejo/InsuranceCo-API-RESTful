@@ -36,8 +36,8 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 var representativesList = await _representativeService.GetAllRepresentatives(name);
                 var representativeDto = _mapper.Map<IEnumerable<RepresentativeDto>>(representativesList);
-                var response = new ApiResponse<IEnumerable<RepresentativeDto>>(representativeDto);
-                return Ok(response);
+                //var response = new ApiResponse<IEnumerable<RepresentativeDto>>(representativeDto);
+                return Ok(representativeDto);
             }
             catch (Exception)
             {
@@ -53,9 +53,9 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 var representative = await _representativeService.GetRepresentativeById(id);
                 var representativeDto = _mapper.Map<RepresentativeDto>(representative);
-                var response = new ApiResponse<RepresentativeDto>(representativeDto);
+                //var response = new ApiResponse<RepresentativeDto>(representativeDto);
 
-                return Ok(response);
+                return Ok(representativeDto);
 
             }
             catch (Exception)
