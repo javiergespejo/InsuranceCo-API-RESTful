@@ -6,8 +6,6 @@ namespace GestionReclamosRemastered.Core.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IUserRepository UserRepository { get; }
-        IUserTypeRepository UserTypeRepository { get; }
-
         IRepresentativeRepository RepresentativeRepository { get; }
         IReclamanteRepository ReclamanteRepository { get; }
         void SaveChanges();

@@ -10,8 +10,6 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
         {
             CreateMap<Usuario, UserDto>().ForMember(x => x.Password, opt => opt.Ignore());
             CreateMap<UserDto, Usuario>();
-            CreateMap<TipoUsuario, TipoUsuarioDto>();
-            CreateMap<TipoUsuarioDto, TipoUsuario>();
 
             CreateMap<Representante, RepresentativeDto>();
             CreateMap<RepresentativeDto, Representante>();

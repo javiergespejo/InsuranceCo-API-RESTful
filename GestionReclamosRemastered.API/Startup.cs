@@ -41,7 +41,7 @@ namespace GestionReclamosRemastered.API
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IReclamanteService, ReclamanteService>();
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserTypeRepository, UserTypeRepository>();
+            
 
             services.AddTransient<IRepresentativeRepository, RepresentativeRepository>();
             services.AddTransient<IRepresentativeService, RepresentativeService>();
@@ -102,6 +102,7 @@ namespace GestionReclamosRemastered.API
                     }
                 });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
