@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SiniestroController : ControllerBase
@@ -62,6 +62,10 @@ namespace GestionReclamosRemastered.API.Controllers
         public async Task<IActionResult> PostSiniestro(SiniestroDto siniestroDto)
         {
             var siniestro = _mapper.Map<Siniestro>(siniestroDto);
+
+            // El webforms no está trayendo el NroStro cuando se da el AltaSiniestro, por eso la siguiente línea
+            siniestro.NroStro = await _unitOfWork.SiniestroRepository.NroStroAsign();
+
             if (await _unitOfWork.SiniestroRepository.SiniestroExist(siniestro))
             {
                 return BadRequest();
