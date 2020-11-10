@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -42,8 +42,8 @@ namespace GestionReclamosRemastered.API.Controllers
             if (users.Count() > 0)
             {
                 var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
-                var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
-                return Ok(response);
+                //var response = new ApiResponse<IEnumerable<UserDto>>(usersDto);
+                return Ok(usersDto);
             }
             return NotFound();
         }
@@ -61,8 +61,8 @@ namespace GestionReclamosRemastered.API.Controllers
             if (user != null)
             {
                 var userDto = _mapper.Map<UserDto>(user);
-                var response = new ApiResponse<UserDto>(userDto);
-                return Ok(response);
+                //var response = new ApiResponse<UserDto>(userDto);
+                return Ok(userDto);
             }
             return NotFound();
         }

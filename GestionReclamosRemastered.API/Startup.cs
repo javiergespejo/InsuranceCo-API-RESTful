@@ -77,6 +77,10 @@ namespace GestionReclamosRemastered.API
             services.AddTransient<IConceptoPagoRepository, ConceptoPagoRepository>();
             services.AddTransient<IConceptoPagoService, ConceptoPagoService>();
 
+            // ClasePago
+            services.AddTransient<IClasePagoRepository, ClasePagoRepository>();
+            services.AddTransient<IClasePagoService, ClasePagoService>();
+
             // Authentication
             services.AddAuthentication(options =>
             {

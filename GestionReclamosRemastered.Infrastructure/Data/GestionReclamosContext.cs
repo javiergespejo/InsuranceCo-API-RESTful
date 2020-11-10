@@ -79,7 +79,7 @@ namespace GestionReclamosRemastered.Infrastructure.Data
 
             modelBuilder.Entity<ConceptoPago>(entity =>
             {
-                entity.HasKey(e => new { e.IdClasePago, e.IdConcepto })
+                entity.HasKey(e => e.IdConcepto)
                     .HasName("PK__concepto__303BBBDC34DA70F6");
 
                 entity.ToTable("concepto_pago");
@@ -462,7 +462,7 @@ namespace GestionReclamosRemastered.Infrastructure.Data
                 entity.HasIndex(e => e.IdUsuario)
                     .HasName("FK_monto_usuario");
 
-                entity.HasIndex(e => new { e.IdClasePago, e.IdConcepto })
+                entity.HasIndex(e => e.IdConcepto)
                     .HasName("FK_monto_concpeto");
 
                 entity.Property(e => e.IdEstimacion).HasColumnName("id_estimacion");
@@ -515,7 +515,7 @@ namespace GestionReclamosRemastered.Infrastructure.Data
 
                 entity.HasOne(d => d.IdC)
                     .WithMany(p => p.Monto)
-                    .HasForeignKey(d => new { d.IdClasePago, d.IdConcepto })
+                    .HasForeignKey(d => d.IdConcepto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_monto_concpeto");
             });
