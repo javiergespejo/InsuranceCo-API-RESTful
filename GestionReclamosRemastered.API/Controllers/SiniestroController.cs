@@ -2,6 +2,7 @@
 using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
+using GestionReclamosRemastered.Core.QueryFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +28,11 @@ namespace GestionReclamosRemastered.API.Controllers
 
         // GET: api/Siniestro
         [HttpGet]
-        public async Task<IActionResult> GetAllSiniestros()
+        public async Task<IActionResult> GetAllSiniestros([FromQuery]SiniestroQueryFilter siniestroQueryFilter)
         {
             try
             {
-                var siniestrosDto = await _siniestroService.GetAllSiniestros();
+                var siniestrosDto = await _siniestroService.GetAllSiniestros(siniestroQueryFilter);
                 if (siniestrosDto == null)
                 {
                     return NotFound();

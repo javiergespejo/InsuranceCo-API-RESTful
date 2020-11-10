@@ -1,4 +1,5 @@
 ﻿using GestionReclamosRemastered.Core.DTOs;
+using GestionReclamosRemastered.Core.QueryFilters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace GestionReclamosRemastered.Core.Interfaces
 {
     public interface ISiniestroService
     {
-        Task<List<SiniestroDto>> GetAllSiniestros();
+        Task<List<SiniestroDto>> GetAllSiniestros(SiniestroQueryFilter siniestroQueryFilter);
 
         Task<SiniestroDto> GetSiniestroById(long id);
     }

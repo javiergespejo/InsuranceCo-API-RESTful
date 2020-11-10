@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Interfaces;
+using GestionReclamosRemastered.Core.QueryFilters;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.Core.Services
@@ -19,9 +21,9 @@ namespace GestionReclamosRemastered.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<List<SiniestroDto>> GetAllSiniestros()
+        public async Task<List<SiniestroDto>> GetAllSiniestros(SiniestroQueryFilter siniestroQueryFilter)
         {
-            var siniestros = await _unitOfWork.SiniestroRepository.GetAllAsync();
+            var siniestros = await _unitOfWork.SiniestroRepository.SiniestroSearch(siniestroQueryFilter);
             var siniestrosDto = _mapper.Map<List<SiniestroDto>>(siniestros);
 
             return siniestrosDto;
