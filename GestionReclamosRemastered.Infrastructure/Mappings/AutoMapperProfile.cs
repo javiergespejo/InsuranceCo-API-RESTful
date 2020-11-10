@@ -31,12 +31,10 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
             CreateMap<Representante, RepresentativeDto>().ReverseMap();
 
             //Monto
-            CreateMap<Monto, MontoDto>();
-            CreateMap<MontoDto, Monto>();
+            CreateMap<Monto, MontoDto>().ReverseMap();
 
             //ConceptoPago
-            CreateMap<ConceptoPago, ConceptoPagoDto>();
-            CreateMap<ConceptoPagoDto, ConceptoPago>();
+            CreateMap<ConceptoPago, ConceptoPagoDto>().ReverseMap();
         }
     }
 }

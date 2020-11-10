@@ -20,13 +20,13 @@ namespace GestionReclamosRemastered.Core.Services
             return conceptoPagos;
         }
 
-        public async Task<ConceptoPago> GetConceptoPagosById(int id)
-        {
-            var conceptoPagos = await _unitOfWork.ConceptoPagoRepository.GetById(id);
-            var clasePagos = _unitOfWork.ClasePagoRepository.GetAll().ToList();
-            conceptoPagos.IdClasePagoNavigation = clasePagos.Where(x => x.IdClasePago == conceptoPagos.IdClasePago).FirstOrDefault();
-            return conceptoPagos;
-        }
+        //public async Task<ConceptoPago> GetConceptoPagosById(int id)
+        //{
+        //    var conceptoPagos = await _unitOfWork.ConceptoPagoRepository.GetById(id);
+        //    var clasePagos = _unitOfWork.ClasePagoRepository.GetAll().ToList();
+        //    conceptoPagos.IdClasePagoNavigation = clasePagos.Where(x => x.IdClasePago == conceptoPagos.IdClasePago).FirstOrDefault();
+        //    return conceptoPagos;
+        //}
 
         public async Task<bool> UpdateConceptoPago(ConceptoPago conceptoPago)
         {
