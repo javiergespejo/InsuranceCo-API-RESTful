@@ -27,8 +27,8 @@ namespace GestionReclamosRemastered.Core.DTOs
         public double? DañoAsegurado { get; set; }
         public string TxtHora { get; set; }
         public int IdResponsabilidad { get; set; }
-        public  ICollection<Juicio> Juicio { get; set; }
-        public  ICollection<Mediacion> Mediacion { get; set; }
-        public  ICollection<Reclamante> Reclamante { get; set; }
+        //public  ICollection<Juicio> Juicio { get; set; }
+        //public  ICollection<Mediacion> Mediacion { get; set; }
+        //public  ICollection<Reclamante> Reclamante { get; set; }
     }   
 }
