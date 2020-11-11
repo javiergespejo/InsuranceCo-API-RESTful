@@ -10,7 +10,7 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly GestionReclamosContext _context;
+        protected readonly GestionReclamosContext _context;
         protected readonly DbSet<T> _entities;
         public GenericRepository(GestionReclamosContext context)
         {

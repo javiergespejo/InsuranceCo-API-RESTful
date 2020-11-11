@@ -7,5 +7,7 @@ namespace GestionReclamosRemastered.Core.Interfaces
     {
         Task<bool> UpdateClaimant(Reclamante claimant);
         Task<bool> SoftDelete(int id);
+        bool GetReclamanteTieneMontosVinculados(long? id_reclamante, long? Id_stro);
+
     }
 }

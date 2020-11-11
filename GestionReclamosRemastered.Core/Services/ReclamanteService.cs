@@ -31,5 +31,17 @@ namespace GestionReclamosRemastered.Core.Services
             await _unitOfWork.SaveChangesAsync();
             return true;
         }
+
+        public bool GetReclamanteTieneMontosVinculados(long? id_reclamante, long? Id_stro)
+        {
+
+            if (_unitOfWork.ReclamanteRepository.GetReclamanteTieneMontosVinculados(id_reclamante, Id_stro) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }
