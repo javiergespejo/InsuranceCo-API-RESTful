@@ -27,9 +27,9 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Siniestro>> SiniestroSearch(SiniestroQueryFilter siniestroQueryFilter)
         {
-            if (siniestroQueryFilter.NroStro != null)
+            if (siniestroQueryFilter.NroSiniestroProteccion != null)
             {
-                var siniestros = await _entities.Where(x => x.NroStro == siniestroQueryFilter.NroStro).ToListAsync();
+                var siniestros = await _entities.Where(x => x.NroSiniestroProteccion == siniestroQueryFilter.NroSiniestroProteccion).ToListAsync();
                 return siniestros;
             }
             else if (siniestroQueryFilter.TxtConductor != null)
@@ -46,6 +46,11 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
             {
                 return await _entities.ToListAsync();
             }
+        }
+        public async Task<Siniestro> GetSiniestroByNroStro(long nroStro)
+        {
+            var siniestro = await _entities.FirstOrDefaultAsync(x => x.NroSiniestroProteccion == nroStro);
+            return siniestro;
         }
     }
 }
