@@ -44,12 +44,11 @@ namespace GestionReclamosRemastered.API.Controllers
                 return BadRequest();
             }            
         }
-
-        // GET: api/Siniestro/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSiniestroById(long id)
+        // GET: api/Siniestro/NroStro
+        [HttpGet("{nroStro}")]
+        public async Task<IActionResult> GetSiniestroByNroStro(long nroStro)
         {
-            var siniestroDto = await _siniestroService.GetSiniestroById(id);
+            var siniestroDto = await _siniestroService.GetSiniestroByNroStro(nroStro);
             if (siniestroDto == null)
             {
                 return NotFound();
@@ -57,6 +56,19 @@ namespace GestionReclamosRemastered.API.Controllers
 
             return Ok(siniestroDto);
         }
+
+        //// GET: api/Siniestro/5
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetSiniestroById(long id)
+        //{
+        //    var siniestroDto = await _siniestroService.GetSiniestroById(id);
+        //    if (siniestroDto == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(siniestroDto);
+        //}
 
         // POST: api/Siniestro
         [HttpPost]

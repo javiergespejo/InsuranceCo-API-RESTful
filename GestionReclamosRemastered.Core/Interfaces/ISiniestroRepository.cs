@@ -10,5 +10,6 @@ namespace GestionReclamosRemastered.Core.Interfaces
         Task<bool> SiniestroExist(Siniestro siniestro);
         Task<long> NroStroAsign();
         Task<IEnumerable<Siniestro>> SiniestroSearch(SiniestroQueryFilter siniestroQueryFilter);
+        Task<Siniestro> GetSiniestroByNroStro(long nroStro);
     }
 }

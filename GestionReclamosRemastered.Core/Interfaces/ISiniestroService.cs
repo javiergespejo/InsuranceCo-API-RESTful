@@ -11,6 +11,6 @@ namespace GestionReclamosRemastered.Core.Interfaces
     {
         Task<List<SiniestroDto>> GetAllSiniestros(SiniestroQueryFilter siniestroQueryFilter);
 
-        Task<SiniestroDto> GetSiniestroById(long id);
+        Task<SiniestroDto> GetSiniestroByNroStro(long nroStro);
     }
 }

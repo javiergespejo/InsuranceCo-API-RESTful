@@ -29,9 +29,9 @@ namespace GestionReclamosRemastered.Core.Services
             return siniestrosDto;
         }
 
-        public async Task<SiniestroDto> GetSiniestroById(long id)
+        public async Task<SiniestroDto> GetSiniestroByNroStro(long nroStro)
         {
-            var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
+            var siniestro = await _unitOfWork.SiniestroRepository.GetSiniestroByNroStro(nroStro);
             var siniestroDto = _mapper.Map<SiniestroDto>(siniestro);
 
             return siniestroDto;
