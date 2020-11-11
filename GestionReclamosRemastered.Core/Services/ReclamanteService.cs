@@ -42,6 +42,26 @@ namespace GestionReclamosRemastered.Core.Services
             return false;
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId((long)id);
+                if (claimant != null)
+                {
 
+                    await _unitOfWork.ReclamanteRepository.DeleteLong(id);
+                    await _unitOfWork.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+            
+        }
     }
 }

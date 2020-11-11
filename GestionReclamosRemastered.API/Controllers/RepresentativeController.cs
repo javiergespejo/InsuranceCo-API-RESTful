@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RepresentativeController : Controller

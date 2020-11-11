@@ -117,7 +117,7 @@ namespace GestionReclamosRemastered.API.Controllers
         }
 
         /// <summary>
-        /// Delete claimant by id
+        /// Hard Delete claimant by id
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
@@ -125,7 +125,7 @@ namespace GestionReclamosRemastered.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
-            var isDeleted = await _reclamanteService.SoftDelete(id);
+            var isDeleted = await _reclamanteService.Delete(id);
             if (isDeleted)
             {
                 return Ok();
