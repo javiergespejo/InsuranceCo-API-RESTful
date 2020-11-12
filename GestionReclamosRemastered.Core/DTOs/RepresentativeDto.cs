@@ -2,7 +2,7 @@
 {
     public class RepresentativeDto
     {
-        //public int IdRepresentante { get; set; }
+        public int IdRepresentante { get; set; }
         public string TxtNombre { get; set; }
         public string TxtTelefono { get; set; }
         public string TxtMail { get; set; }

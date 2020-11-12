@@ -31,5 +31,37 @@ namespace GestionReclamosRemastered.Core.Services
             await _unitOfWork.SaveChangesAsync();
             return true;
         }
+
+        public bool GetReclamanteTieneMontosVinculados(long? id_reclamante, long? Id_stro)
+        {
+
+            if (_unitOfWork.ReclamanteRepository.GetReclamanteTieneMontosVinculados(id_reclamante, Id_stro) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                var claimant = await _unitOfWork.ReclamanteRepository.GetByLongId((long)id);
+                if (claimant != null)
+                {
+
+                    await _unitOfWork.ReclamanteRepository.DeleteLong(id);
+                    await _unitOfWork.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+            
+        }
     }
 }
