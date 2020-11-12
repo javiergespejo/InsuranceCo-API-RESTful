@@ -6,7 +6,7 @@ namespace GestionReclamosRemastered.Core.DTOs
 {
     public class SiniestroDto
     {
-        //public long IdStro { get; set; }
+        public long IdStro { get; set; }
         public long NroStro { get; set; }
         public int IdTipoSiniestro { get; set; }
         public DateTime FechaSiniestro { get; set; }
