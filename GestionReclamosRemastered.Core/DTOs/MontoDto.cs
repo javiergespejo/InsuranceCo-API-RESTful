@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionReclamosRemastered.Core.Entities;
+using System;
 
 namespace GestionReclamosRemastered.Core.DTOs
 {
@@ -16,10 +17,12 @@ namespace GestionReclamosRemastered.Core.DTOs
         public int IdSituacion { get; set; }
         public int CodEstim { get; set; }
 
-        //public ConceptoPagoDto IdC { get; set; }
-        //public ClasePagoDto IdClasePagoNavigation { get; set; }
-        //public TipoInstanciaDto IdInstanciaNavigation { get; set; }
-        //public TipoMontoDto IdTipoMontoNavigation { get; set; }
-        //public UserDto IdUsuarioNavigation { get; set; }
+        public ConceptoPagoDto IdC { get; set; }
+        public ClasePagoDto IdClasePagoNavigation { get; set; }
+        public TipoInstanciaDto IdInstanciaNavigation { get; set; }
+        public TipoMontoDto IdTipoMontoNavigation { get; set; }
+        public UserDto IdUsuarioNavigation { get; set; }
+        public ReclamanteDto Reclamante { get; set; }
     }
+
 }

@@ -15,5 +15,6 @@ namespace GestionReclamosRemastered.Core.Interfaces
         IClasePagoRepository ClasePagoRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
+
     }
 }

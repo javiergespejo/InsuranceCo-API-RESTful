@@ -31,8 +31,14 @@ namespace GestionReclamosRemastered.API.Controllers
 
         //GET: api/<MontoController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(long? id_stro)
         {
+            if (id_stro != null)
+            {
+                var montos = _unitOfWork.MontoRepository.BuscarPagosPorIdSiniestroAPI(id_stro);
+                return Ok(montos);
+                
+            };
             try
             {
                 var montos = _montoService.GetFullMonto();
