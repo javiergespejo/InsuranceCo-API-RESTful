@@ -73,6 +73,24 @@ namespace GestionReclamosRemastered.API.Controllers
             return CreatedAtAction("PostRecupero", recuperoDto);
         }
 
+        // POST: api/Recupero/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutRecupero(int id, RecuperoDto recuperoDto)
+        {
+            var recupero = _mapper.Map<Recupero>(recuperoDto);
+            recupero.IdRecupero = id;
+            try
+            {
+                _unitOfWork.RecuperoRepository.Update(recupero);
+                await _unitOfWork.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         // PATCH: api/Recupero/5
         [HttpPatch("{id}")]
         public async Task<IActionResult> PatchRecupero(long id, [FromBody] JsonPatchDocument<RecuperoDto> patchDocDto)
