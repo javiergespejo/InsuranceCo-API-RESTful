@@ -43,19 +43,16 @@ namespace GestionReclamosRemastered.API.Controllers
         }
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            try
-            {
-                var conceptoPago = await _conceptoPagoService.GetConceptoPagosById(id);
-                var conceptoPagoDto = _mapper.Map<ConceptoPagoDto>(conceptoPago);
-                //var response = new ApiResponse<ConceptoPagoDto>(conceptoPagoDto);
-                return Ok(conceptoPagoDto);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+                var conceptoPago = await _unitOfWork.ConceptoPagoRepository.GetById(id);
+                if (conceptoPago != null)
+                {
+                    var conceptoPagoDto = _mapper.Map<ConceptoPagoDto>(conceptoPago);
+                    //var response = new ApiResponse<ConceptoPagoDto>(conceptoPagoDto);
+                    return Ok(conceptoPagoDto);
+                }
+                return NotFound(); 
         }
         // POST api/<UserController>
         [HttpPost]
