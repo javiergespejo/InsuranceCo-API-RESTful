@@ -44,24 +44,12 @@ namespace GestionReclamosRemastered.API.Controllers
                 return BadRequest();
             }            
         }
-        // GET: api/Siniestro/NroStro
-        [HttpGet("{nroStro}")]
-        public async Task<IActionResult> GetSiniestroByNroStro(long nroStro)
-        {
-            var siniestroDto = await _siniestroService.GetSiniestroByNroStro(nroStro);
-            if (siniestroDto == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(siniestroDto);
-        }
-
-        //// GET: api/Siniestro/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetSiniestroById(long id)
+        //// GET: api/Siniestro/NroStro
+        //[HttpGet("{nroStro}")]
+        //public async Task<IActionResult> GetSiniestroByNroStro(long nroStro)
         //{
-        //    var siniestroDto = await _siniestroService.GetSiniestroById(id);
+        //    var siniestroDto = await _siniestroService.GetSiniestroByNroStro(nroStro);
         //    if (siniestroDto == null)
         //    {
         //        return NotFound();
@@ -69,6 +57,20 @@ namespace GestionReclamosRemastered.API.Controllers
 
         //    return Ok(siniestroDto);
         //}
+
+        // GET: api/Siniestro/5
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSiniestroById(long id)
+        {
+            var siniestroDto = await _unitOfWork.SiniestroRepository.GetByLongId(id);
+            if (siniestroDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(siniestroDto);
+        }
 
         // POST: api/Siniestro
         [HttpPost]
@@ -81,7 +83,7 @@ namespace GestionReclamosRemastered.API.Controllers
 
             if (await _unitOfWork.SiniestroRepository.SiniestroExist(siniestro))
             {
-                return BadRequest();
+                return NotFound();
             }
 
             try
@@ -95,6 +97,26 @@ namespace GestionReclamosRemastered.API.Controllers
             }
 
             return CreatedAtAction("PostSiniestro", siniestroDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutSiniestro(long id, SiniestroDto siniestroDto)
+        {
+            var siniestro = _mapper.Map<Siniestro>(siniestroDto);
+            //siniestro.IdStro = id;
+
+            try
+            {
+                _unitOfWork.SiniestroRepository.Update(siniestro);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Ok(siniestroDto);
+
         }
 
         // PATCH: api/Siniestro/5
