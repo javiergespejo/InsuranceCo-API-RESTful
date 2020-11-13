@@ -79,9 +79,9 @@ namespace GestionReclamosRemastered.API.Controllers
                 await _unitOfWork.SaveChangesAsync();
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
 
         }

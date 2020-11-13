@@ -22,6 +22,5 @@ namespace GestionReclamosRemastered.Core.Entities
         public virtual TipoInstancia IdInstanciaNavigation { get; set; }
         public virtual TipoMonto IdTipoMontoNavigation { get; set; }
         public virtual Usuario IdUsuarioNavigation { get; set; }
-        public virtual Reclamante Reclamante { get; set; }
     }
 }
