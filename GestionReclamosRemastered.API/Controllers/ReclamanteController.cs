@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using GestionReclamosRemastered.API.Responses;
 using GestionReclamosRemastered.Core.DTOs;
 using GestionReclamosRemastered.Core.Entities;
 using GestionReclamosRemastered.Core.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestionReclamosRemastered.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -36,15 +34,19 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<ReclamanteDto>))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public IActionResult Get()
+        public IActionResult Get(long? id_reclamante, long? Id_stro)
         {
-
+            if (id_reclamante != null && Id_stro != null)
+            {
+                return Ok(_reclamanteService.GetReclamanteTieneMontosVinculados(id_reclamante, Id_stro));
+                
+            }
             var claimants = _unitOfWork.ReclamanteRepository.GetAll();
             if (claimants.Count() > 0)
             {
                 var claimantsDto = _mapper.Map<IEnumerable<ReclamanteDto>>(claimants);
-                var response = new ApiResponse<IEnumerable<ReclamanteDto>>(claimantsDto);
-                return Ok(response);
+                //var response = new ApiResponse<IEnumerable<ReclamanteDto>>(claimantsDto);
+                return Ok(claimantsDto);
             }
             return BadRequest();
 
@@ -63,8 +65,8 @@ namespace GestionReclamosRemastered.API.Controllers
             if (claimant != null)
             {
                 var claimantDto = _mapper.Map<ReclamanteDto>(claimant);
-                var response = new ApiResponse<ReclamanteDto>(claimantDto);
-                return Ok(response);
+                //var response = new ApiResponse<ReclamanteDto>(claimantDto);
+                return Ok(claimantDto);
             }
             return NotFound();
         }
@@ -105,8 +107,8 @@ namespace GestionReclamosRemastered.API.Controllers
                 var claimant = _mapper.Map<Reclamante>(claimantDto);
                 claimant.IdReclamante = id;
                 var result = await _reclamanteService.UpdateClaimant(claimant);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                //var response = new ApiResponse<bool>(result);
+                return Ok(result);
             }
             catch (Exception)
             {
@@ -115,7 +117,7 @@ namespace GestionReclamosRemastered.API.Controllers
         }
 
         /// <summary>
-        /// Delete claimant by id
+        /// Hard Delete claimant by id
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
@@ -123,7 +125,7 @@ namespace GestionReclamosRemastered.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
-            var isDeleted = await _reclamanteService.SoftDelete(id);
+            var isDeleted = await _reclamanteService.Delete(id);
             if (isDeleted)
             {
                 return Ok();

@@ -30,14 +30,14 @@ namespace GestionReclamosRemastered.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetRepresentatives()
+        public async Task<IActionResult> GetRepresentatives(string name)
         {
             try
             {
-                var representativesList = await _representativeService.GetAllRepresentatives();
+                var representativesList = await _representativeService.GetAllRepresentatives(name);
                 var representativeDto = _mapper.Map<IEnumerable<RepresentativeDto>>(representativesList);
-                var response = new ApiResponse<IEnumerable<RepresentativeDto>>(representativeDto);
-                return Ok(response);
+                //var response = new ApiResponse<IEnumerable<RepresentativeDto>>(representativeDto);
+                return Ok(representativeDto);
             }
             catch (Exception)
             {
@@ -52,20 +52,18 @@ namespace GestionReclamosRemastered.API.Controllers
             try
             {
                 var representative = await _representativeService.GetRepresentativeById(id);
-                if (representative != null)
-                {
-                    var representativeDto = _mapper.Map<RepresentativeDto>(representative);
-                    var response = new ApiResponse<RepresentativeDto>(representativeDto);
+                var representativeDto = _mapper.Map<RepresentativeDto>(representative);
+                //var response = new ApiResponse<RepresentativeDto>(representativeDto);
 
-                    return Ok(response);
-                }
-                throw new Exception();
+                return Ok(representativeDto);
+
             }
             catch (Exception)
             {
                 return NotFound();
             }
         }
+        
         [HttpPost]
         public async Task<IActionResult> PostRepresentative(RepresentativeDto representativeDto)
         {

@@ -32,8 +32,8 @@ namespace GestionReclamosRemastered.API.Controllers
             {
                 var conceptoPago = _conceptoPagoService.GetFullConceptoPagos();
                 var conceptoPagoDto = _mapper.Map<IEnumerable<ConceptoPagoDto>>(conceptoPago);
-                var response = new ApiResponse<IEnumerable<ConceptoPagoDto>>(conceptoPagoDto);
-                return Ok(response);
+                //var response = new ApiResponse<IEnumerable<ConceptoPagoDto>>(conceptoPagoDto);
+                return Ok(conceptoPagoDto);
             }
             catch (Exception)
             {

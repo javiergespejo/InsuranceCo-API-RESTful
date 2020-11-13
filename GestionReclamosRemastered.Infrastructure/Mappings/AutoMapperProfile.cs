@@ -35,6 +35,12 @@ namespace GestionReclamosRemastered.Infrastructure.Mappings
 
             //ConceptoPago
             CreateMap<ConceptoPago, ConceptoPagoDto>().ReverseMap();
+            //ClasePago
+            CreateMap<ClasePago, ClasePagoDto>().ReverseMap();
+
+            //Representante
+            CreateMap<Representante, RepresentativeDto>().ReverseMap();
+            CreateMap<ReclamanteDto, Reclamante>().ReverseMap();
         }
     }
 }

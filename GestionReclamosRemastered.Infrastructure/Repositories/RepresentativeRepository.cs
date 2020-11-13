@@ -24,6 +24,7 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
             return await _entities.FirstOrDefaultAsync(x => x.IdRepresentante == -1);
         }
 
+
         /// <summary>
         /// Returns a list of active representatives
         /// </summary>
@@ -31,6 +32,15 @@ namespace GestionReclamosRemastered.Infrastructure.Repositories
         public async Task<IEnumerable<Representante>> GetRepresentativesAsync()
         {
             return await _entities.Where(x => x.SnActivo == -1).ToListAsync();
+        }
+        /// <summary>
+        /// Returns a Representative by name, else returns null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Representante>> GetByName(string name)
+        {
+            return await _entities.Where(x => x.TxtNombre.Contains(name)).ToListAsync();
         }
     }
 }
