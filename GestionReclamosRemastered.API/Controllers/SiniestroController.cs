@@ -39,9 +39,9 @@ namespace GestionReclamosRemastered.API.Controllers
                 }
                 return Ok(siniestrosDto);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }            
         }
 
@@ -63,11 +63,13 @@ namespace GestionReclamosRemastered.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSiniestroById(long id)
         {
-            var siniestroDto = await _unitOfWork.SiniestroRepository.GetByLongId(id);
-            if (siniestroDto == null)
+            var siniestro = await _unitOfWork.SiniestroRepository.GetByLongId(id);
+            if (siniestro == null)
             {
                 return NotFound();
             }
+
+            var siniestroDto = _mapper.Map<SiniestroDto>(siniestro);
 
             return Ok(siniestroDto);
         }
